@@ -17,7 +17,14 @@ instantiate the \link[mlr3]{Resampling}s per \link[mlr3]{Task}.}
 Keep the fitted model after the test set has been predicted?
 Set to \code{TRUE} if you want to further analyse the models or want to
 extract information like variable importance.}
+
+\item{reg}{\link[batchtools:makeExperimentRegistry]{batchtools::ExperimentRegistry}.}
+}
+\value{
+\code{\link[=data.table]{data.table()}} with ids of created jobs.
 }
 \description{
-Benchmark experiments on batch systems
+Populates a \link[batchtools:makeExperimentRegistry]{batchtools::ExperimentRegistry} with jobs in a \code{\link[mlr3:benchmark]{mlr3::benchmark()}} fashion.
+Each combination of \link[mlr3:Task]{mlr3::Task} and \link[mlr3:Resampling]{mlr3::Resampling} defines a \link[batchtools:addProblem]{batchtools::Problem},
+each \link[mlr3:Learner]{mlr3::Learner} is an \link[batchtools:addAlgorithm]{batchtools::Algorithm}.
 }

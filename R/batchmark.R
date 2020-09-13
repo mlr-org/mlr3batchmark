@@ -28,68 +28,103 @@ batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultR
   assert_names(names(design), permutation.of = c("task", "learner", "resampling"))
   assert_flag(store_models)
   batchtools::assertRegistry(reg, class = "ExperimentRegistry")
-
-  phashes = character()
-  ahashes = character()
-  rhashes = character()
-  if (FALSE) {
-    reg = makeExperimentRegistry(NA)
-  }
+  exports = batchtools::batchExport(reg = reg)$name
 
   for (i in seq_row(design)) {
     task = design$task[[i]]
-    learner = design$learner[[i]]
+    thash = task$hash
+    if (thash %nin% reg$problems) {
+      batchtools::addProblem(thash, data = task, reg = reg)
+    }
+
     resampling = design$resampling[[i]]
-
-    prob_id = task$id
-    algo_id = learner$id
-
-    phash = task$hash
-    if (phash %nin% phashes) {
-      phashes = c(phash, phashes)
-      addProblem(prob_id, data = task, fun = get_resampling, reg = reg)
-    }
-
     rhash = resampling$hash
-    if (rhash %nin% rhashes) {
-      batchExport(set_names(list(resampling), sprintf("resampling_%s", resampling$hash)))
+    if (rhash %nin% exports) {
+      batchtools::batchExport(export = set_names(list(resampling), rhash), reg = reg)
+      exports = c(exports, rhash)
     }
 
-    ahash = learner$hash
-    if (ahash %nin% ahashes) {
-      ahashes = c(ahash, ahashes)
-      batchExport(set_names(list(learner), sprintf("learner_%s", learner$hash)))
-      addAlgorithm(algo_id, fun = run_learner, reg = reg)
+    learner = design$learner[[i]]
+    lhash = learner$hash
+    if (lhash %nin% exports) {
+      batchtools::batchExport(export = set_names(list(learner), lhash), reg = reg)
+      exports = c(exports, lhash)
     }
 
-    prob_design = data.table(task_hash = task$hash, resampling_hash = resampling$hash, resampling_id = resampling$id)
-    algo_design = data.table(learner_hash = learner$hash)
+    if ("run_learner" %nin% reg$algorithms) {
+      batchtools::addAlgorithm("run_learner", fun = run_learner, reg = reg)
+    }
 
-    addExperiments(
-      prob.designs = named_list(prob_id, prob_design),
-      algo.designs = named_list(algo_id, algo_design),
+    prob_design = set_names(list(data.table(
+      task_hash = thash, task_id = task$id,
+      resampling_hash = rhash, resampling_id = resampling$id
+    )), thash)
+    algo_design = list(run_learner = data.table(
+      learner_hash = lhash, learner_id = learner$id)
+    )
+
+    ids = batchtools::addExperiments(
+      prob.designs = prob_design,
+      algo.designs = algo_design,
       repls = resampling$iters,
       reg = reg
     )
+
+    setJobNames(ids, names = rep(uuid::UUIDgenerate(), nrow(ids)), reg = reg)
   }
 }
 
 reduceResultsBatchmark = function(ids = NULL, reg = batchtools::getDefaultRegistry()) {
   ids = batchtools::findDone(ids, reg = reg)
+  tabs = split(unnest(getJobTable(ids, reg = reg), c("prob.pars", "algo.pars")), by = "job.name")
+  bmr = mlr3::BenchmarkResult$new()
 
-  tab = unnest(getJobPars(ids), c("prob.pars", "algo.pars"))
-  grouped = tab[, list(job.id = list(job.id)),  by = c("task_hash", "learner_hash", "resampling_hash")]
+  for (tab in tabs) {
+    job = makeJob(tab$job.id[1L], reg = reg)
 
-  for (ids in tab$job.id) {
-    job = makeJob(ids[1L])
-    task = job$problem$data
-    resampling = job$instance
-    learner = job
+    thash = job$prob.pars$task_hash
+    ii = bmr$tasks[list(thash), on = "task_hash", which = TRUE, nomatch = NULL]
+    if (length(ii)) {
+      task = bmr$tasks$task[[ii]]
+    } else {
+      task = job$problem$data
+    }
+
+    rhash = job$prob.pars$resampling_hash
+    ii = bmr$resamplings[list(rhash), on = "resampling_hash", which = TRUE, nomatch = NULL]
+    if (length(ii)) {
+      resampling = bmr$resamplings$resampling[[ii]]
+    } else {
+      resampling = get_export(rhash)
+    }
+
+    lhash = job$algo.pars$learner_hash
+    ii = bmr$learners[list(lhash), on = "learner_hash", which = TRUE, nomatch = NULL]
+    if (length(ii)) {
+      learner = bmr$learners$learner[[ii]]
+    } else {
+      learner = get_export(lhash)
+    }
+
+    results = reduceResultsList(tab$job.id, reg = reg)
+    rr = ResampleResult$new(
+      task = task,
+      learner = learner,
+      states = map(results, "learner_state"),
+      resampling = resampling,
+      iterations = tab$repl,
+      predictions = map(results, "prediction"),
+      uhash = tab$job.name[1L])
+
+    bmr$combine(as_benchmark_result(rr))
   }
+
+  return(bmr)
 }
 
 if (FALSE) {
   library(mlr3)
+  library(batchtools)
   tasks = list(mlr3::tsk("iris"), mlr3::tsk("sonar"))
   learners = list(mlr3::lrn("classif.featureless"), mlr3::lrn("classif.rpart"))
   resamplings = list(mlr3::rsmp("cv", folds = 3), mlr3::rsmp("holdout"))
@@ -101,19 +136,11 @@ if (FALSE) {
   )
 
   reg = batchtools::makeExperimentRegistry(NA)
+  reg$cluster.functions = makeClusterFunctionsSocket()
   batchmark(design)
-
   submitJobs()
 
-  batchtools::getStatus()
+  getErrorMessages()
 
-  showLog(1)
-
-  findErrors()
-  getJobPars(findErrors())
-  makeJob(2)
-  getJobTable()
-
-
-  batchtools::reduceResultsList()
+  reduceResultsBatchmark()
 }

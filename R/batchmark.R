@@ -108,16 +108,17 @@ reduceResultsBatchmark = function(ids = NULL, reg = batchtools::getDefaultRegist
     }
 
     results = batchtools::reduceResultsList(tab$job.id, reg = reg)
-    rr = mlr3::ResampleResult$new(
-      task = task,
-      learner = learner,
-      states = map(results, "learner_state"),
-      resampling = resampling,
-      iterations = tab$repl,
-      predictions = map(results, "prediction"),
-      uhash = tab$job.name[1L])
+    new_bmr = mlr3::BenchmarkResult$new(data.table(
+      task = list(task),
+      learner = list(learner),
+      state = map(results, "learner_state"),
+      resampling = list(resampling),
+      iteration = tab$repl,
+      prediction = map(results, "prediction"),
+      uhash = tab$job.name
+    ))
 
-    bmr$combine(mlr3::as_benchmark_result(rr))
+    bmr$combine(new_bmr)
   }
 
   return(bmr)

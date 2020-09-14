@@ -17,6 +17,7 @@
 ^\.pre-commit-config\.yaml$
 ^\.ccache$
 ^\.github$
+^\.lintr$
 ^tic\.R$
 ^docs$
 ^\.vscode$

@@ -28,3 +28,18 @@ Populates a \link[batchtools:makeExperimentRegistry]{batchtools::ExperimentRegis
 Each combination of \link[mlr3:Task]{mlr3::Task} and \link[mlr3:Resampling]{mlr3::Resampling} defines a \link[batchtools:addProblem]{batchtools::Problem},
 each \link[mlr3:Learner]{mlr3::Learner} is an \link[batchtools:addAlgorithm]{batchtools::Algorithm}.
 }
+\examples{
+tasks = list(mlr3::tsk("iris"), mlr3::tsk("sonar"))
+learners = list(mlr3::lrn("classif.featureless"), mlr3::lrn("classif.rpart"))
+resamplings = list(mlr3::rsmp("cv", folds = 3), mlr3::rsmp("holdout"))
+
+design = mlr3::benchmark_grid(
+  tasks = tasks,
+  learners = learners,
+  resamplings = resamplings
+)
+
+reg = batchtools::makeExperimentRegistry(NA)
+batchmark(design, reg = reg)
+batchtools::submitJobs(reg = reg)
+}

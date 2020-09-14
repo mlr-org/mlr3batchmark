@@ -23,6 +23,7 @@
 #'
 #' reg = batchtools::makeExperimentRegistry(NA)
 #' batchmark(design, reg = reg)
+#' batchtools::submitJobs(reg = reg)
 batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultRegistry()) {
   design = as.data.table(assert_data_frame(design, min.rows = 1L))
   assert_names(names(design), permutation.of = c("task", "learner", "resampling"))
@@ -70,17 +71,17 @@ batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultR
       reg = reg
     )
 
-    setJobNames(ids, names = rep(uuid::UUIDgenerate(), nrow(ids)), reg = reg)
+    batchtools::setJobNames(ids, names = rep(uuid::UUIDgenerate(), nrow(ids)), reg = reg)
   }
 }
 
 reduceResultsBatchmark = function(ids = NULL, reg = batchtools::getDefaultRegistry()) {
   ids = batchtools::findDone(ids, reg = reg)
-  tabs = split(unnest(getJobTable(ids, reg = reg), c("prob.pars", "algo.pars")), by = "job.name")
+  tabs = split(unnest(batchtools::getJobTable(ids, reg = reg), c("prob.pars", "algo.pars")), by = "job.name")
   bmr = mlr3::BenchmarkResult$new()
 
   for (tab in tabs) {
-    job = makeJob(tab$job.id[1L], reg = reg)
+    job = batchtools::makeJob(tab$job.id[1L], reg = reg)
 
     thash = job$prob.pars$task_hash
     ii = bmr$tasks[list(thash), on = "task_hash", which = TRUE, nomatch = NULL]
@@ -95,7 +96,7 @@ reduceResultsBatchmark = function(ids = NULL, reg = batchtools::getDefaultRegist
     if (length(ii)) {
       resampling = bmr$resamplings$resampling[[ii]]
     } else {
-      resampling = get_export(rhash)
+      resampling = get_export(rhash, reg)
     }
 
     lhash = job$algo.pars$learner_hash
@@ -103,11 +104,11 @@ reduceResultsBatchmark = function(ids = NULL, reg = batchtools::getDefaultRegist
     if (length(ii)) {
       learner = bmr$learners$learner[[ii]]
     } else {
-      learner = get_export(lhash)
+      learner = get_export(lhash, reg)
     }
 
-    results = reduceResultsList(tab$job.id, reg = reg)
-    rr = ResampleResult$new(
+    results = batchtools::reduceResultsList(tab$job.id, reg = reg)
+    rr = mlr3::ResampleResult$new(
       task = task,
       learner = learner,
       states = map(results, "learner_state"),
@@ -116,7 +117,7 @@ reduceResultsBatchmark = function(ids = NULL, reg = batchtools::getDefaultRegist
       predictions = map(results, "prediction"),
       uhash = tab$job.name[1L])
 
-    bmr$combine(as_benchmark_result(rr))
+    bmr$combine(mlr3::as_benchmark_result(rr))
   }
 
   return(bmr)

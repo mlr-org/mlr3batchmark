@@ -1,3 +1,3 @@
-get_export = function(needle) {
-  readRDS(batchExport(reg = reg)[list(needle), on = "name"]$uri)
+get_export = function(needle, reg) {
+  readRDS(batchtools::batchExport(reg = reg)[list(needle), on = "name"]$uri)
 }

@@ -22,6 +22,7 @@ Imports:
     batchtools,
     checkmate,
     data.table,
+    uuid,
     mlr3 (>= 0.5.0),
     mlr3misc
 Encoding: UTF-8

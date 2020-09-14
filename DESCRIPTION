@@ -23,8 +23,10 @@ Imports:
     checkmate,
     data.table,
     uuid,
-    mlr3 (>= 0.5.0),
+    mlr3 (>= 0.6.0),
     mlr3misc
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Suggests:
+    testthat

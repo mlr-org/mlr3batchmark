@@ -24,6 +24,8 @@
 #' reg = batchtools::makeExperimentRegistry(NA)
 #' batchmark(design, reg = reg)
 #' batchtools::submitJobs(reg = reg)
+#'
+#' reduceResultsBatchmark(reg = reg)
 batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultRegistry()) {
   design = as.data.table(assert_data_frame(design, min.rows = 1L))
   assert_names(names(design), permutation.of = c("task", "learner", "resampling"))

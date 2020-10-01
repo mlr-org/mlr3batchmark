@@ -44,7 +44,7 @@ reduceResultsBatchmark = function(ids = NULL, reg = batchtools::getDefaultRegist
     new_bmr = mlr3::BenchmarkResult$new(data.table(
       task = list(task),
       learner = list(learner),
-      state = map(results, "learner_state"),
+      learner_state = map(results, "learner_state"),
       resampling = list(resampling),
       iteration = tab$repl,
       prediction = map(results, "prediction"),

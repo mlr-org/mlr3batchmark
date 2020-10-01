@@ -42,4 +42,6 @@ design = mlr3::benchmark_grid(
 reg = batchtools::makeExperimentRegistry(NA)
 batchmark(design, reg = reg)
 batchtools::submitJobs(reg = reg)
+
+reduceResultsBatchmark(reg = reg)
 }

@@ -1,4 +1,3 @@
-
 test_that("basic workflow", {
   tasks = list(mlr3::tsk("iris"), mlr3::tsk("sonar"))
   learners = list(mlr3::lrn("classif.featureless"), mlr3::lrn("classif.rpart"))

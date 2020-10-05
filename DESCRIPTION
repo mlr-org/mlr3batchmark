@@ -24,6 +24,8 @@ Imports:
     uuid,
     mlr3 (>= 0.7.0),
     mlr3misc
+Suggests:
+    rpart
 Remotes:
     mlr-org/mlr3
 Encoding: UTF-8

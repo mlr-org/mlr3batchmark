@@ -15,7 +15,6 @@ test_that("basic workflow", {
   expect_data_table(ids, nrows = 16)
 
   logs = batchtools::getErrorMessages(reg = reg)
-  print(logs)
   expect_data_table(logs, nrows = 0L)
   results = reduceResultsBatchmark(reg = reg)
   expect_is(results, "BenchmarkResult")

@@ -23,7 +23,7 @@ Imports:
     checkmate,
     data.table,
     uuid,
-    mlr3 (>= 0.6.0),
+    mlr3 (>= 0.7.0),
     mlr3misc
 Remotes:
     mlr-org/mlr3

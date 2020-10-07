@@ -7,10 +7,9 @@ Authors@R:
            role = c("cre", "aut"),
            email = "michellang@gmail.com",
            comment = c(ORCID = "0000-0001-9754-0393"))
-Description: Extends the 'mlr3' package with a connector
-    to the package 'batchtools'. This allows to run large scale
-    benchmark experiments on scheduled high-performance computing
-    systems.
+Description: Extends the 'mlr3' package with a connector to the
+    package 'batchtools'. This allows to run large scale benchmark
+    experiments on scheduled high-performance computing systems.
 License: LGPL-3
 URL: https:///mlr3batchmark.mlr-org.com,
     https://github.com/mlr-org/mlr3batchmark
@@ -21,15 +20,14 @@ Imports:
     batchtools,
     checkmate,
     data.table,
-    uuid,
     mlr3 (>= 0.7.0),
-    mlr3misc
+    mlr3misc,
+    uuid
 Suggests:
-    rpart
+    rpart,
+    testthat
 Remotes:
     mlr-org/mlr3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-Suggests:
-    testthat

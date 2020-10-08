@@ -21,4 +21,5 @@ test_that("basic workflow", {
   expect_data_table(logs, nrows = 0L)
   results = reduceResultsBatchmark(reg = reg)
   expect_is(results, "BenchmarkResult")
+  expect_benchmark_result(results)
 })

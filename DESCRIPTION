@@ -20,7 +20,7 @@ Imports:
     batchtools,
     checkmate,
     data.table,
-    mlr3 (>= 0.7.0),
+    mlr3 (>= 0.10.0),
     mlr3misc,
     uuid
 Suggests:

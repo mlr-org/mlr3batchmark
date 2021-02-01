@@ -16,42 +16,42 @@ reduceResultsBatchmark = function(ids = NULL, reg = batchtools::getDefaultRegist
   for (tab in tabs) {
     job = batchtools::makeJob(tab$job.id[1L], reg = reg)
 
-    thash = job$prob.pars$task_hash
-    ii = bmr$tasks[list(thash), on = "task_hash", which = TRUE, nomatch = NULL]
+    task_hash = job$prob.pars$task_hash
+    ii = bmr$tasks[list(task_hash), on = "task_hash", which = TRUE, nomatch = NULL]
     if (length(ii)) {
       task = bmr$tasks$task[[ii]]
     } else {
       task = job$problem$data
     }
 
-    rhash = job$prob.pars$resampling_hash
-    ii = bmr$resamplings[list(rhash), on = "resampling_hash", which = TRUE, nomatch = NULL]
+    resampling_hash = job$prob.pars$resampling_hash
+    ii = bmr$resamplings[list(resampling_hash), on = "resampling_hash", which = TRUE, nomatch = NULL]
     if (length(ii)) {
       resampling = bmr$resamplings$resampling[[ii]]
     } else {
-      resampling = get_export(rhash, reg)
+      resampling = get_export(resampling_hash, reg)
     }
 
-    lhash = job$algo.pars$learner_hash
-    ii = bmr$learners[list(lhash), on = "learner_hash", which = TRUE, nomatch = NULL]
+    learner_hash = job$algo.pars$learner_hash
+    ii = bmr$learners[list(learner_hash), on = "learner_hash", which = TRUE, nomatch = NULL]
     if (length(ii)) {
       learner = bmr$learners$learner[[ii]]
     } else {
-      learner = get_export(lhash, reg)
+      learner = get_export(learner_hash, reg)
     }
 
     results = batchtools::reduceResultsList(tab$job.id, reg = reg)
-    new_bmr = mlr3::BenchmarkResult$new(data.table(
+    results = mlr3::ResultData$new(data.table(
       task = list(task),
       learner = list(learner),
-      learner_state = map(results, "learner_state"),
       resampling = list(resampling),
       iteration = tab$repl,
       prediction = map(results, "prediction"),
+      learner_state = map(results, "learner_state"),
       uhash = tab$job.name
-    ))
+    ), store_backends = FALSE)
 
-    bmr$combine(new_bmr)
+    bmr$combine(mlr3::BenchmarkResult$new(results))
   }
 
   return(bmr)

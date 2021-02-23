@@ -4,7 +4,11 @@
 \alias{reduceResultsBatchmark}
 \title{Collect Results from batchmark}
 \usage{
-reduceResultsBatchmark(ids = NULL, reg = batchtools::getDefaultRegistry())
+reduceResultsBatchmark(
+  ids = NULL,
+  store_backends = TRUE,
+  reg = batchtools::getDefaultRegistry()
+)
 }
 \arguments{
 \item{ids}{[\code{\link[base]{data.frame}} or \code{integer}]\cr
@@ -13,6 +17,15 @@ with a column named \dQuote{job.id}.
 Alternatively, you may also pass a vector of integerish job ids.
 If not set, defaults to the return value of \code{\link[batchtools]{findDone}}.
 Invalid ids are ignored.}
+
+\item{store_backends}{(\code{logical(1)})\cr
+Keep the \link[mlr3]{DataBackend} of the \link[mlr3]{Task} in the \link[mlr3]{BenchmarkResult}?
+Set to \code{TRUE} if your performance measures require a \link[mlr3]{Task},
+or to analyse results more conveniently.
+Set to \code{FALSE} to reduce the file size and memory footprint
+after serialization.
+The current default is \code{TRUE}, but this eventually will be changed
+in a future release.}
 
 \item{reg}{[\code{\link[batchtools]{Registry}}]\cr
 Registry. If not explicitly passed, uses the default registry (see \code{\link[batchtools]{setDefaultRegistry}}).}
@@ -23,4 +36,9 @@ Registry. If not explicitly passed, uses the default registry (see \code{\link[b
 \description{
 Collect the results from jobs defined via \code{\link[=batchmark]{batchmark()}} and combine them into
 a \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}.
+
+Note that \code{ids} defaults to finished jobs (as reported by \code{\link[batchtools:findJobs]{batchtools::findDone()}}).
+If a job threw an error, is expired or is still running, it will be ignored with this default.
+Just leaving these jobs out in an analysis is \strong{not} statistically sound.
+Instead, try to robustify your jobs by using a fallback learner (c.f. \link[mlr3:Learner]{mlr3::Learner}).
 }

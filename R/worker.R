@@ -1,4 +1,4 @@
-run_learner = function(job, data, learner_hash, ...) {
+run_learner = function(job, data, learner_hash, store_models, ...) {
   workhorse = utils::getFromNamespace("workhorse", ns = asNamespace("mlr3"))
   resampling = get(job$prob.pars$resampling_hash, envir = .GlobalEnv)
   learner = get(learner_hash, envir = .GlobalEnv)
@@ -7,6 +7,7 @@ run_learner = function(job, data, learner_hash, ...) {
     iteration = job$repl,
     task = data,
     learner = learner,
-    resampling = resampling
+    resampling = resampling,
+    store_models = store_models
   )
 }

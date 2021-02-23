@@ -14,7 +14,7 @@ The helper function \code{\link[mlr3:benchmark_grid]{benchmark_grid()}} can assi
 instantiate the \link[mlr3]{Resampling}s per \link[mlr3]{Task}.}
 
 \item{store_models}{(\code{logical(1)})\cr
-Keep the fitted model after the test set has been predicted?
+Store the fitted model in the resulting \link[mlr3]{BenchmarkResult}?
 Set to \code{TRUE} if you want to further analyse the models or want to
 extract information like variable importance.}
 

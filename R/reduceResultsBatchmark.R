@@ -4,12 +4,23 @@
 #' Collect the results from jobs defined via [batchmark()] and combine them into
 #' a [mlr3::BenchmarkResult].
 #'
+#' Note that `ids` defaults to finished jobs (as reported by [batchtools::findDone()]).
+#' If a job threw an error, is expired or is still running, it will be ignored with this default.
+#' Just leaving these jobs out in an analysis is **not** statistically sound.
+#' Instead, try to robustify your jobs by using a fallback learner (c.f. [mlr3::Learner]).
+#'
 #' @inheritParams batchtools::reduceResultsList
+#' @inheritParams mlr3::benchmark
 #'
 #' @return [mlr3::BenchmarkResult].
 #' @export
-reduceResultsBatchmark = function(ids = NULL, reg = batchtools::getDefaultRegistry()) { # nolint
-  ids = batchtools::findDone(ids, reg = reg)
+reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batchtools::getDefaultRegistry()) { # nolint
+  if (is.null(ids)) {
+    ids = batchtools::findDone(ids, reg = reg)
+  } else if (nrow(batchtools::findNotDone(ids, reg = reg))) {
+    stop("All jobs must be have been successfully computed")
+  }
+
   tabs = split(unnest(batchtools::getJobTable(ids, reg = reg), c("prob.pars", "algo.pars")), by = "job.name")
   bmr = mlr3::BenchmarkResult$new()
 
@@ -41,7 +52,7 @@ reduceResultsBatchmark = function(ids = NULL, reg = batchtools::getDefaultRegist
     }
 
     results = batchtools::reduceResultsList(tab$job.id, reg = reg)
-    results = mlr3::ResultData$new(data.table(
+    rdata = ResultData$new(data.table(
       task = list(task),
       learner = list(learner),
       resampling = list(resampling),
@@ -49,9 +60,8 @@ reduceResultsBatchmark = function(ids = NULL, reg = batchtools::getDefaultRegist
       prediction = map(results, "prediction"),
       learner_state = map(results, "learner_state"),
       uhash = tab$job.name
-    ), store_backends = FALSE)
-
-    bmr$combine(mlr3::BenchmarkResult$new(results))
+    ), store_backends = store_backends)
+    bmr$combine(mlr3::BenchmarkResult$new(rdata))
   }
 
   return(bmr)

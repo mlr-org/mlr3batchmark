@@ -52,7 +52,7 @@ reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batch
     }
 
     results = batchtools::reduceResultsList(tab$job.id, reg = reg)
-    rdata = ResultData$new(data.table(
+    rdata = mlr3::ResultData$new(data.table(
       task = list(task),
       learner = list(learner),
       resampling = list(resampling),

@@ -22,7 +22,9 @@ test_that("basic workflow", {
   expect_data_table(as.data.table(results), nrow = 16L)
 })
 
-test_that("parallel socket", {
+test_that("parallel multicore", {
+  skip_on_os("windows")
+
   tasks = list(mlr3::tsk("iris"), mlr3::tsk("sonar"))
   learners = list(mlr3::lrn("classif.featureless"), mlr3::lrn("classif.rpart"))
   resamplings = list(mlr3::rsmp("cv", folds = 3), mlr3::rsmp("holdout"))
@@ -34,7 +36,7 @@ test_that("parallel socket", {
   )
 
   reg = batchtools::makeExperimentRegistry(NA, make.default = FALSE)
-  reg$cluster.functions = batchtools::makeClusterFunctionsSocket(4)
+  reg$cluster.functions = batchtools::makeClusterFunctionsMulticore(2)
   batchmark(design, reg = reg)
   ids = batchtools::submitJobs(reg = reg)
   expect_data_table(ids, nrows = 16)

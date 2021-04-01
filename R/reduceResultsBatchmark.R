@@ -26,29 +26,32 @@ reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batch
 
   for (tab in tabs) {
     job = batchtools::makeJob(tab$job.id[1L], reg = reg)
+    bmr_tasks = bmr$tasks
+    bmr_learners = bmr$learners
+    bmr_resamplings = bmr$resamplings
 
-    task_hash = job$prob.pars$task_hash
-    ii = bmr$tasks[list(task_hash), on = "task_hash", which = TRUE, nomatch = NULL]
+    needle = job$prob.pars$task_hash
+    ii = bmr_tasks[list(needle), on = "task_hash", which = TRUE, nomatch = NULL]
     if (length(ii)) {
-      task = bmr$tasks$task[[ii]]
+      task = bmr_tasks$task[[ii]]
     } else {
       task = job$problem$data
     }
 
-    resampling_hash = job$prob.pars$resampling_hash
-    ii = bmr$resamplings[list(resampling_hash), on = "resampling_hash", which = TRUE, nomatch = NULL]
+    needle = job$prob.pars$resampling_hash
+    ii = bmr_resamplings[list(needle), on = "resampling_hash", which = TRUE, nomatch = NULL]
     if (length(ii)) {
-      resampling = bmr$resamplings$resampling[[ii]]
+      resampling = bmr_resamplings$resampling[[ii]]
     } else {
-      resampling = get_export(resampling_hash, reg)
+      resampling = get_export(needle, reg)
     }
 
-    learner_hash = job$algo.pars$learner_hash
-    ii = bmr$learners[list(learner_hash), on = "learner_hash", which = TRUE, nomatch = NULL]
+    needle = job$algo.pars$learner_hash
+    ii = bmr_learners[list(needle), on = "learner_hash", which = TRUE, nomatch = NULL]
     if (length(ii)) {
-      learner = bmr$learners$learner[[ii]]
+      learner = bmr_learners$learner[[ii]]
     } else {
-      learner = get_export(learner_hash, reg)
+      learner = get_export(needle, reg)
     }
 
     results = batchtools::reduceResultsList(tab$job.id, reg = reg)

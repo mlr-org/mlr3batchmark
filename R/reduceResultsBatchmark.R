@@ -17,11 +17,16 @@
 reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batchtools::getDefaultRegistry()) { # nolint
   if (is.null(ids)) {
     ids = batchtools::findDone(ids, reg = reg)
-  } else if (nrow(batchtools::findNotDone(ids, reg = reg))) {
-    stop("All jobs must be have been successfully computed")
+  } else {
+    ids = batchtools::findJobs(ids = ids, reg = reg) # convert to proper table
+    if (nrow(batchtools::findNotDone(ids, reg = reg))) {
+      stop("All jobs must be have been successfully computed")
+    }
   }
 
-  tabs = split(unnest(batchtools::getJobTable(ids, reg = reg), c("prob.pars", "algo.pars")), by = "job.name")
+  tabs = batchtools::getJobTable(ids, reg = reg)[, c("job.id", "job.name", "repl", "prob.pars", "algo.pars"), with = FALSE]
+  tabs = unnest(tabs, c("prob.pars", "algo.pars"))
+  tabs = split(tabs, by = "job.name")
   bmr = mlr3::BenchmarkResult$new()
 
   for (tab in tabs) {

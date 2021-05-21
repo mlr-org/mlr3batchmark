@@ -8,7 +8,7 @@
 #' @inheritParams mlr3::benchmark
 #' @param reg [batchtools::ExperimentRegistry].
 #'
-#' @return [data.table()] with ids of created jobs.
+#' @return [data.table()] with ids of created jobs (invisibly).
 #' @export
 #' @examples
 #' tasks = list(mlr3::tsk("iris"), mlr3::tsk("sonar"))
@@ -30,7 +30,8 @@ batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultR
   design = as.data.table(assert_data_frame(design, min.rows = 1L))
   assert_names(names(design), permutation.of = c("task", "learner", "resampling"))
   assert_flag(store_models)
-  batchtools::assertRegistry(reg, class = "ExperimentRegistry")
+  batchtools::assertRegistry(reg, class = "ExperimentRegistry", writeable = TRUE, sync = TRUE,
+    running.ok = FALSE)
 
   # add worker algorithm
   if (!test_subset(reg$algorithms, "run_learner")) {
@@ -41,6 +42,7 @@ batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultR
     batchtools::addAlgorithm("run_learner", fun = run_learner, reg = reg)
   }
 
+  ids = vector("list", nrow(design))
   exports = batchtools::batchExport(reg = reg)$name
 
   for (i in seq_row(design)) {
@@ -64,22 +66,23 @@ batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultR
       exports = c(exports, learner_hash)
     }
 
-    prob_design = set_names(list(data.table(
+    prob_design = data.table(
       task_hash = task_hash, task_id = task$id,
       resampling_hash = resampling_hash, resampling_id = resampling$id
-    )), task_hash)
+    )
 
-    algo_design = list(run_learner = data.table(
+    algo_design = data.table(
       learner_hash = learner_hash, learner_id = learner$id, store_models = store_models
-    ))
+    )
 
-    ids = batchtools::addExperiments(
-      prob.designs = prob_design,
-      algo.designs = algo_design,
+    ids[[i]] = batchtools::addExperiments(
+      prob.designs = set_names(list(prob_design), task_hash),
+      algo.designs = list(run_learner = algo_design),
       repls = resampling$iters,
       reg = reg
     )
-
-    batchtools::setJobNames(ids, names = rep(uuid::UUIDgenerate(), nrow(ids)), reg = reg)
   }
+
+  update_job_names(reg)
+  invisible(rbindlist(ids, use.names = TRUE))
 }

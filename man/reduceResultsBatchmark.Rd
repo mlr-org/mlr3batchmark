@@ -19,7 +19,7 @@ If not set, defaults to the return value of \code{\link[batchtools]{findDone}}.
 Invalid ids are ignored.}
 
 \item{store_backends}{(\code{logical(1)})\cr
-Keep the \link[mlr3]{DataBackend} of the \link[mlr3]{Task} in the \link[mlr3]{BenchmarkResult}?
+Keep the \link[mlr3]{DataBackend} of the \link[mlr3]{Task} in the \link[mlr3]{ResampleResult}?
 Set to \code{TRUE} if your performance measures require a \link[mlr3]{Task},
 or to analyse results more conveniently.
 Set to \code{FALSE} to reduce the file size and memory footprint

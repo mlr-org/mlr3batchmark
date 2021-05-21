@@ -14,14 +14,14 @@ The helper function \code{\link[mlr3:benchmark_grid]{benchmark_grid()}} can assi
 instantiate the \link[mlr3]{Resampling}s per \link[mlr3]{Task}.}
 
 \item{store_models}{(\code{logical(1)})\cr
-Store the fitted model in the resulting \link[mlr3]{BenchmarkResult}?
+Store the fitted model in the resulting object=
 Set to \code{TRUE} if you want to further analyse the models or want to
 extract information like variable importance.}
 
 \item{reg}{\link[batchtools:makeExperimentRegistry]{batchtools::ExperimentRegistry}.}
 }
 \value{
-\code{\link[=data.table]{data.table()}} with ids of created jobs.
+\code{\link[=data.table]{data.table()}} with ids of created jobs (invisibly).
 }
 \description{
 Populates a \link[batchtools:makeExperimentRegistry]{batchtools::ExperimentRegistry} with jobs in a \code{\link[mlr3:benchmark]{mlr3::benchmark()}} fashion.

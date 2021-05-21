@@ -10,7 +10,8 @@ test_that("basic workflow", {
   )
 
   reg = batchtools::makeExperimentRegistry(NA, make.default = FALSE)
-  batchmark(design, reg = reg)
+  ids = batchmark(design, reg = reg)
+  expect_data_table(ids, ncol = 1L, nrows = 16L)
   ids = batchtools::submitJobs(reg = reg)
   expect_data_table(ids, nrows = 16)
 

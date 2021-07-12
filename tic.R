@@ -12,3 +12,8 @@ if (ci_on_ghactions() && ci_has_env("BUILD_PKGDOWN")) {
     add_step(step_install_github("mlr-org/mlr3pkgdowntemplate"))
   do_pkgdown()
 }
+
+if (ci_on_ghactions() && ci_has_env("MLR3DEVEL")) {
+  get_stage("install") %>%
+    add_step(step_install_github("mlr-org/mlr3"))
+}

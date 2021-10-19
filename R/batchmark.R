@@ -42,28 +42,36 @@ batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultR
     batchtools::addAlgorithm("run_learner", fun = run_learner, reg = reg)
   }
 
-  ids = vector("list", nrow(design))
+  # group per problem to speed up addExperiments()
+  set(design, j = "task_hash", value = map_chr(design$task, "hash"))
+  set(design, j = "learner_hash", value = map_chr(design$learner, "hash"))
+  set(design, j = "resampling_hash", value = map_chr(design$resampling, "hash"))
+  design[, "group" := .GRP, by = c("task_hash", "resampling_hash")]
+
+  groups = unique(design$group)
+  ids = vector("list", length(groups))
   exports = batchtools::batchExport(reg = reg)$name
 
-  for (i in seq_row(design)) {
-    task = design$task[[i]]
-    task_hash = task$hash
+  for (g in groups) {
+    tab = design[list(g), on = "group"]
+
+    task = tab$task[[1L]]
+    task_hash = tab$task_hash[1L]
     if (task_hash %nin% reg$problems) {
       batchtools::addProblem(task_hash, data = task, reg = reg)
     }
 
-    resampling = design$resampling[[i]]
-    resampling_hash = resampling$hash
+    resampling = tab$resampling[[1L]]
+    resampling_hash = tab$resampling_hash[1L]
     if (resampling_hash %nin% exports) {
       batchtools::batchExport(export = set_names(list(resampling), resampling_hash), reg = reg)
       exports = c(exports, resampling_hash)
     }
 
-    learner = design$learner[[i]]
-    learner_hash = learner$hash
-    if (learner_hash %nin% exports) {
-      batchtools::batchExport(export = set_names(list(learner), learner_hash), reg = reg)
-      exports = c(exports, learner_hash)
+    learner_hashes = tab$learner_hash
+    for (i in which(learner_hashes %nin% exports)) {
+      batchtools::batchExport(export = set_names(list(tab$learner[[i]]), learner_hashes[i]), reg = reg)
+      exports = c(exports, learner_hashes[i])
     }
 
     prob_design = data.table(
@@ -72,10 +80,11 @@ batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultR
     )
 
     algo_design = data.table(
-      learner_hash = learner_hash, learner_id = learner$id, store_models = store_models
+      learner_hash = learner_hashes, learner_id = map_chr(tab$learner, "id"),
+      store_models = store_models
     )
 
-    ids[[i]] = batchtools::addExperiments(
+    ids[[g]] = batchtools::addExperiments(
       prob.designs = set_names(list(prob_design), task_hash),
       algo.designs = list(run_learner = algo_design),
       repls = resampling$iters,
@@ -83,6 +92,8 @@ batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultR
     )
   }
 
+  # name jobs belonging to the same resampling with a unique identifier
   update_job_names(reg)
-  invisible(rbindlist(ids, use.names = TRUE))
+
+  invisible(rbindlist(ids, use.names = FALSE))
 }

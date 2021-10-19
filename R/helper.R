@@ -12,6 +12,6 @@ update_job_names = function(reg) {
     stop("Ambiguous uhashes for job names found in registry")
   }
 
-  reg$status[, "job.name" := generate_job_name(job.name), by = "def.id"]
+  reg$status[, "job.name" := generate_job_name(.SD$job.name), by = "def.id", .SDcols = "job.name"]
   batchtools::saveRegistry(reg)
 }

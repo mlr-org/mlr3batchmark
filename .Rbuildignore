@@ -7,7 +7,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^man-roxygen$
-^attic$
 ^pkgdown$
 ^inst/extdata/.+\.R$
 ^README\.Rmd$
@@ -18,7 +17,6 @@
 ^\.ccache$
 ^\.github$
 ^\.lintr$
-^tic\.R$
 ^docs$
 ^\.vscode$
 ^codemeta\.json$

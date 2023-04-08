@@ -33,6 +33,10 @@ batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultR
   batchtools::assertRegistry(reg, class = "ExperimentRegistry", writeable = TRUE, sync = TRUE,
     running.ok = FALSE)
 
+  assert_list(design$task, "Task")
+  assert_list(design$learner, "Learner")
+  assert_list(design$resampling, "Resampling")
+
   # add worker algorithm
   if (!test_subset(reg$algorithms, "run_learner")) {
     stopf("No additional algorithms may be defined in the registry")

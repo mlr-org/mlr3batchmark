@@ -12,6 +12,7 @@ test_that("reduceResultsBatchmark", {
   reg = batchtools::makeExperimentRegistry(NA)
   batchmark(design, reg = reg)
   batchtools::submitJobs(reg = reg)
+  batchtools::waitForJobs(reg = reg)
 
   bmr = reduceResultsBatchmark(reg = reg)
   expect_character(bmr$uhashes, len = nrow(design), any.missing = FALSE, unique = TRUE)

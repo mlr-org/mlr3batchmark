@@ -1,0 +1,46 @@
+---
+output: github_document
+---
+# mlr3batchmark
+
+[![r-cmd-check](https://github.com/mlr-org/mlr3batchmark/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/mlr-org/mlr3batchmark/actions/workflows/r-cmd-check.yml)
+[![CRAN status](https://www.r-pkg.org/badges/version/mlr3batchmark)](https://CRAN.R-project.org/package=mlr3batchmark)
+[![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
+[![Mattermost](https://img.shields.io/badge/chat-mattermost-orange.svg)](https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/)
+
+A connector between [mlr3](https://github.com/mlr-org/mlr3) and [batchtools](https://mllg.github.io/batchtools/).
+This allows to run large-scale benchmark experiments on scheduled high-performance computing clusters.
+
+The package comes with two core functions for switching between `mlr3` and `batchtools` to perform a benchmark:
+
+* After creating a `design` object (as required for `mlr3`'s `benchmark()` function), instead of `benchmark()` call `batchmark()` which populates
+  an `ExperimentRegistry` for the computational jobs of the benchmark.
+  You are now in the world of `batchtools` where you can selectively submit jobs with different resources, monitor the progress or resubmit as needed.
+* After the computations are finished, collect the results with `reduceResultsBatchmark()` to return to `mlr3`.
+  The resulting object is a regular `BenchmarkResult`.
+
+## Example
+
+```{r}
+library("mlr3")
+library("batchtools")
+library("mlr3batchmark")
+tasks = tsks(c("iris", "sonar"))
+learners = lrns(c("classif.featureless", "classif.rpart"))
+resamplings = rsmp("cv", folds = 3)
+
+design = benchmark_grid(
+  tasks = tasks,
+  learners = learners,
+  resamplings = resamplings
+)
+
+reg = makeExperimentRegistry(NA)
+ids = batchmark(design, reg = reg)
+
+submitJobs()
+getStatus()
+
+reduceResultsBatchmark()
+```
+

@@ -8,8 +8,8 @@ Authors@R:
            email = "michellang@gmail.com",
            comment = c(ORCID = "0000-0001-9754-0393"))
 Description: Extends the 'mlr3' package with a connector to the
-    package 'batchtools'. This allows to run large scale benchmark
-    experiments on scheduled high-performance computing systems.
+    package 'batchtools'. This allows to run large-scale benchmark
+    experiments on scheduled high-performance computing clusters.
 License: LGPL-3
 URL: https:///mlr3batchmark.mlr-org.com,
     https://github.com/mlr-org/mlr3batchmark

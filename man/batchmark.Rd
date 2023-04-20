@@ -2,7 +2,7 @@
 % Please edit documentation in R/batchmark.R
 \name{batchmark}
 \alias{batchmark}
-\title{Benchmark experiments on batch systems}
+\title{Benchmark Experiments on Batch Systems}
 \usage{
 batchmark(design, store_models = FALSE, reg = batchtools::getDefaultRegistry())
 }
@@ -24,9 +24,16 @@ extract information like variable importance.}
 \code{\link[=data.table]{data.table()}} with ids of created jobs (invisibly).
 }
 \description{
-Populates a \link[batchtools:makeExperimentRegistry]{batchtools::ExperimentRegistry} with jobs in a \code{\link[mlr3:benchmark]{mlr3::benchmark()}} fashion.
+This function provides the functionality to leave the interface of \CRANpkg{mlr3} for the computation
+of benchmark experiments and switch over to \CRANpkg{batchtools} for a more fine grained control over
+the execution.
+
+\code{batchmark()} populates a \link[batchtools:makeExperimentRegistry]{batchtools::ExperimentRegistry} with jobs in a \code{\link[mlr3:benchmark]{mlr3::benchmark()}} fashion.
 Each combination of \link[mlr3:Task]{mlr3::Task} and \link[mlr3:Resampling]{mlr3::Resampling} defines a \link[batchtools:addProblem]{batchtools::Problem},
 each \link[mlr3:Learner]{mlr3::Learner} is an \link[batchtools:addAlgorithm]{batchtools::Algorithm}.
+
+After the jobs have been submitted and are terminated, results can be collected with \code{\link[=reduceResultsBatchmark]{reduceResultsBatchmark()}}
+which returns a \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} and thus to return to the interface of \CRANpkg{mlr3}.
 }
 \examples{
 tasks = list(mlr3::tsk("iris"), mlr3::tsk("sonar"))

@@ -44,3 +44,7 @@ getStatus()
 reduceResultsBatchmark()
 ```
 
+
+## Resources
+
+* The *Large-Scale Benchmarking* chapter of the [mlr3 book](https://mlr3book.mlr-org.com/)

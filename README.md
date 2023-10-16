@@ -15,15 +15,15 @@ computing clusters.
 The package comes with two core functions for switching between `mlr3`
 and `batchtools` to perform a benchmark:
 
-- After creating a `design` object (as required for `mlr3`’s
-  `benchmark()` function), instead of `benchmark()` call `batchmark()`
-  which populates an `ExperimentRegistry` for the computational jobs of
-  the benchmark. You are now in the world of `batchtools` where you can
-  selectively submit jobs with different resources, monitor the progress
-  or resubmit as needed.
-- After the computations are finished, collect the results with
-  `reduceResultsBatchmark()` to return to `mlr3`. The resulting object
-  is a regular `BenchmarkResult`.
+  - After creating a `design` object (as required for `mlr3`’s
+    `benchmark()` function), instead of `benchmark()` call `batchmark()`
+    which populates an `ExperimentRegistry` for the computational jobs
+    of the benchmark. You are now in the world of `batchtools` where you
+    can selectively submit jobs with different resources, monitor the
+    progress or resubmit as needed.
+  - After the computations are finished, collect the results with
+    `reduceResultsBatchmark()` to return to `mlr3`. The resulting object
+    is a regular `BenchmarkResult`.
 
 ## Example
 
@@ -44,9 +44,9 @@ design = benchmark_grid(
 reg = makeExperimentRegistry(NA)
 ```
 
-    ## Sourcing configuration file '~/.batchtools.conf.R' ...
+    ## No readable configuration file found
 
-    ## Created registry in '/var/folders/34/j09qp1n14_q833xf2pkg4qwh0000gn/T/RtmpWi6DfV/registrydc34daec2ea' using cluster functions 'Multicore'
+    ## Created registry in '/tmp/RtmpDDRpP5/registry8cb13002568c' using cluster functions 'Interactive'
 
 ``` r
 ids = batchmark(design, reg = reg)
@@ -56,7 +56,7 @@ ids = batchmark(design, reg = reg)
 
     ## Adding problem 'b39ef23a66b1f1ee'
 
-    ## Exporting new objects: '84eca5f1c8c2efd7' ...
+    ## Exporting new objects: 'e6b8ac3a61de1b96' ...
 
     ## Exporting new objects: '7c35d835f3dfae37' ...
 
@@ -66,7 +66,7 @@ ids = batchmark(design, reg = reg)
 
     ## Adding problem '76c4fc7a533d41b7'
 
-    ## Exporting new objects: '8911a9dc10e79d97' ...
+    ## Exporting new objects: '22f85f1b30b9a49c' ...
 
     ## Adding 6 experiments ('76c4fc7a533d41b7'[1] x 'run_learner'[2] x repls[3]) ...
 
@@ -74,20 +74,27 @@ ids = batchmark(design, reg = reg)
 submitJobs()
 ```
 
-    ## Submitting 12 jobs in 12 chunks using cluster functions 'Multicore' ...
+    ## Submitting 12 jobs in 12 chunks using cluster functions 'Interactive' ...
+
+    ## Submitting [=============================>---------------------] 58% eta:
+    ## 0sSubmitting [=================================>-----------------] 67% eta:
+    ## 0sSubmitting [=====================================>-------------] 75% eta:
+    ## 0sSubmitting [=========================================>---------] 83% eta:
+    ## 0sSubmitting [==============================================>----] 92% eta:
+    ## 0sSubmitting [===================================================] 100% eta: 0s
 
 ``` r
 getStatus()
 ```
 
-    ## Status for 12 jobs at 2023-04-20 12:44:13:
+    ## Status for 12 jobs at 2023-10-16 09:49:35:
     ##   Submitted    : 12 (100.0%)
     ##   -- Queued    :  0 (  0.0%)
-    ##   -- Started   :  8 ( 66.7%)
+    ##   -- Started   : 12 (100.0%)
     ##   ---- Running :  0 (  0.0%)
-    ##   ---- Done    :  8 ( 66.7%)
+    ##   ---- Done    : 12 (100.0%)
     ##   ---- Error   :  0 (  0.0%)
-    ##   ---- Expired :  4 ( 33.3%)
+    ##   ---- Expired :  0 (  0.0%)
 
 ``` r
 reduceResultsBatchmark()
@@ -99,3 +106,8 @@ reduceResultsBatchmark()
     ##   2    iris       classif.rpart            cv     3        0      0
     ##   3   sonar classif.featureless            cv     3        0      0
     ##   4   sonar       classif.rpart            cv     3        0      0
+
+## Resources
+
+  - The *Large-Scale Benchmarking* chapter of the [mlr3
+    book](https://mlr3book.mlr-org.com/)

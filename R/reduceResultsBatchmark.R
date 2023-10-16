@@ -63,6 +63,8 @@ reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batch
     rdata = mlr3::ResultData$new(data.table(
       task = list(task),
       learner = list(learner),
+      learner_hash = learner$hash,
+      param_values = list(learner$param_set$values),
       resampling = list(resampling),
       iteration = tab$repl,
       prediction = map(results, "prediction"),

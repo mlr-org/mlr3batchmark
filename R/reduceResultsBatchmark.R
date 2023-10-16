@@ -20,7 +20,7 @@ reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batch
   } else {
     ids = batchtools::findJobs(ids = ids, reg = reg) # convert to proper table
     if (nrow(batchtools::findNotDone(ids, reg = reg))) {
-      stop("All jobs must be have been successfully computed")
+      stop("All jobs must have been successfully computed")
     }
   }
 

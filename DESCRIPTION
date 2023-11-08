@@ -12,9 +12,9 @@ URL: https:///mlr3batchmark.mlr-org.com,
     https://github.com/mlr-org/mlr3batchmark
 BugReports: https://github.com/mlr-org/mlr3batchmark/issues
 Depends:
-    R (>= 3.1.0)
+    R (>= 3.1.0),
+    batchtools (>= 0.9.17)
 Imports:
-    batchtools (>= 0.9.17),
     checkmate,
     data.table,
     lgr,

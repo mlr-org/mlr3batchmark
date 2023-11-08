@@ -32,6 +32,9 @@ which returns a mlr3::BenchmarkResult and thus to return to the interface of mlr
       <ul class="nav navbar-nav"><li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/mlr-org/mlr3batchmark/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
@@ -74,7 +77,8 @@ which returns a <a href="https://mlr3.mlr-org.com/reference/BenchmarkResult.html
 Data frame (or <code><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code>) with three columns: "task", "learner", and "resampling".
 Each row defines a resampling by providing a <a href="https://mlr3.mlr-org.com/reference/Task.html" class="external-link">Task</a>, <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">Learner</a> and an instantiated <a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">Resampling</a> strategy.
 The helper function <code><a href="https://mlr3.mlr-org.com/reference/benchmark_grid.html" class="external-link">benchmark_grid()</a></code> can assist in generating an exhaustive design (see examples) and
-instantiate the <a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">Resampling</a>s per <a href="https://mlr3.mlr-org.com/reference/Task.html" class="external-link">Task</a>.</p></dd>
+instantiate the <a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">Resampling</a>s per <a href="https://mlr3.mlr-org.com/reference/Task.html" class="external-link">Task</a>.
+Additionally, you can set the additional column 'param_values', see <code><a href="https://mlr3.mlr-org.com/reference/benchmark_grid.html" class="external-link">benchmark_grid()</a></code>.</p></dd>
 
 
 <dt>store_models</dt>
@@ -92,7 +96,7 @@ extract information like variable importance.</p></dd>
     <h2>Value</h2>
     
 
-<p><code>data.table()</code> with ids of created jobs (invisibly).</p>
+<p><code><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table()</a></code> with ids of created jobs (invisibly).</p>
     </div>
 
     <div id="ref-examples">
@@ -109,20 +113,20 @@ extract information like variable importance.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">reg</span> <span class="op">=</span> <span class="fu">batchtools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/batchtools/man/makeExperimentRegistry.html" class="external-link">makeExperimentRegistry</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> No readable configuration file found</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Created registry in '/tmp/RtmpPY5oN7/registry4fea26b07e7a' using cluster functions 'Interactive'</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Created registry in '/tmp/RtmpbyWVgQ/registry58f267c8edb8' using cluster functions 'Interactive'</span>
 <span class="r-in"><span><span class="fu">batchmark</span><span class="op">(</span><span class="va">design</span>, reg <span class="op">=</span> <span class="va">reg</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding algorithm 'run_learner'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding problem 'b39ef23a66b1f1ee'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: 'af98017fa47295b3' ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: '8e384fbcd307352a' ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: '7c35d835f3dfae37' ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: '70dd22724e5c724d' ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 6 experiments ('b39ef23a66b1f1ee'[1] x 'run_learner'[2] x repls[3]) ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: '55bf721dd988c5ab' ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: 'cec41bdffb96f38c' ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 2 experiments ('b39ef23a66b1f1ee'[1] x 'run_learner'[2] x repls[1]) ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding problem '76c4fc7a533d41b7'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: '0893d97c8e7dbf78' ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: '646d3980be6e2526' ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 6 experiments ('76c4fc7a533d41b7'[1] x 'run_learner'[2] x repls[3]) ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: '30ae39e02fe28f1d' ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: '742f5681344c3dca' ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 2 experiments ('76c4fc7a533d41b7'[1] x 'run_learner'[2] x repls[1]) ...</span>
 <span class="r-in"><span><span class="fu">batchtools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/batchtools/man/submitJobs.html" class="external-link">submitJobs</a></span><span class="op">(</span>reg <span class="op">=</span> <span class="va">reg</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Submitting 16 jobs in 16 chunks using cluster functions 'Interactive' ...</span>

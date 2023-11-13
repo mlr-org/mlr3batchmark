@@ -67,6 +67,8 @@ reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batch
       iteration = tab$repl,
       prediction = map(results, "prediction"),
       learner_state = map(results, "learner_state"),
+      param_values = map(results, "param_values"),
+      learner_hash = map_chr(results, "learner_hash"),
       uhash = tab$job.name
     ), store_backends = store_backends)
     bmr$combine(mlr3::BenchmarkResult$new(rdata))

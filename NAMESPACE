@@ -2,6 +2,7 @@
 
 export(batchmark)
 export(reduceResultsBatchmark)
+import(batchtools, except = chunk)
 import(checkmate)
 import(data.table)
 import(mlr3misc)

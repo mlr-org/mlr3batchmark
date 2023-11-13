@@ -1,6 +1,6 @@
 Package: mlr3batchmark
 Title: Batch Experiments for 'mlr3'
-Version: 0.1.0
+Version: 0.1.1
 Authors@R:
     person("Michel", "Lang", , "michellang@gmail.com", role = c("cre", "aut"),
            comment = c(ORCID = "0000-0001-9754-0393"))

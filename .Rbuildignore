@@ -21,3 +21,4 @@
 ^\.vscode$
 ^codemeta\.json$
 ^README\.Rmd$
+^cran-comments\.md$

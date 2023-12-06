@@ -22,3 +22,4 @@
 ^codemeta\.json$
 ^README\.Rmd$
 ^cran-comments\.md$
+^CRAN-SUBMISSION$

@@ -15,13 +15,13 @@ computing clusters.
 The package comes with two core functions for switching between `mlr3`
 and `batchtools` to perform a benchmark:
 
-  - After creating a `design` object (as required for `mlr3`’s
+-   After creating a `design` object (as required for `mlr3`’s
     `benchmark()` function), instead of `benchmark()` call `batchmark()`
     which populates an `ExperimentRegistry` for the computational jobs
     of the benchmark. You are now in the world of `batchtools` where you
     can selectively submit jobs with different resources, monitor the
     progress or resubmit as needed.
-  - After the computations are finished, collect the results with
+-   After the computations are finished, collect the results with
     `reduceResultsBatchmark()` to return to `mlr3`. The resulting object
     is a regular `BenchmarkResult`.
 
@@ -46,7 +46,7 @@ reg = makeExperimentRegistry(NA)
 
     ## No readable configuration file found
 
-    ## Created registry in '/tmp/RtmpDDRpP5/registry8cb13002568c' using cluster functions 'Interactive'
+    ## Created registry in '/tmp/Rtmp8DlMZQ/registry704553adf7a88' using cluster functions 'Interactive'
 
 ``` r
 ids = batchmark(design, reg = reg)
@@ -56,7 +56,7 @@ ids = batchmark(design, reg = reg)
 
     ## Adding problem 'b39ef23a66b1f1ee'
 
-    ## Exporting new objects: 'e6b8ac3a61de1b96' ...
+    ## Exporting new objects: '5ec484de3f93431b' ...
 
     ## Exporting new objects: '7c35d835f3dfae37' ...
 
@@ -66,7 +66,7 @@ ids = batchmark(design, reg = reg)
 
     ## Adding problem '76c4fc7a533d41b7'
 
-    ## Exporting new objects: '22f85f1b30b9a49c' ...
+    ## Exporting new objects: 'b209de197d6cbe75' ...
 
     ## Adding 6 experiments ('76c4fc7a533d41b7'[1] x 'run_learner'[2] x repls[3]) ...
 
@@ -76,18 +76,11 @@ submitJobs()
 
     ## Submitting 12 jobs in 12 chunks using cluster functions 'Interactive' ...
 
-    ## Submitting [=============================>---------------------] 58% eta:
-    ## 0sSubmitting [=================================>-----------------] 67% eta:
-    ## 0sSubmitting [=====================================>-------------] 75% eta:
-    ## 0sSubmitting [=========================================>---------] 83% eta:
-    ## 0sSubmitting [==============================================>----] 92% eta:
-    ## 0sSubmitting [===================================================] 100% eta: 0s
-
 ``` r
 getStatus()
 ```
 
-    ## Status for 12 jobs at 2023-10-16 09:49:35:
+    ## Status for 12 jobs at 2023-11-13 19:32:20:
     ##   Submitted    : 12 (100.0%)
     ##   -- Queued    :  0 (  0.0%)
     ##   -- Started   : 12 (100.0%)
@@ -109,5 +102,5 @@ reduceResultsBatchmark()
 
 ## Resources
 
-  - The *Large-Scale Benchmarking* chapter of the [mlr3
+-   The *Large-Scale Benchmarking* chapter of the [mlr3
     book](https://mlr3book.mlr-org.com/)

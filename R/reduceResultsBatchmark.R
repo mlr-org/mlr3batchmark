@@ -68,7 +68,7 @@ reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batch
       if (mlr3::mlr_reflections$package_version != results[[1]]$learner_state$mlr3_version) {
         lg$warn(paste(sep = "\n",
           "The mlr3 version (%s) from one of the trained learners differs from the currently loaded mlr3 version (%s).",
-          "This can lead to unexpected behavior and we recommend installing the package versions used during experiment exectution."),
+          "This can lead to unexpected behavior and we recommend using the same versions of all mlr3 packages for collecting the results."),
           results[[1]]$learner_state$mlr3_version, mlr3::mlr_reflections$package_version)
       }
     }

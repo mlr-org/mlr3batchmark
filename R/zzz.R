@@ -4,3 +4,8 @@
 #' @rawNamespace import(batchtools, except = chunk)
 #' @importFrom uuid UUIDgenerate
 "_PACKAGE"
+
+
+.onLoad = function(libname, pkgname) {
+  assign("lg", lgr::get_logger(pkgname), envir = parent.env(environment()))
+}

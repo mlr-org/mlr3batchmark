@@ -31,3 +31,21 @@ test_that("reduceResultsBatchmark", {
   expect_data_table(tab, nrow = 4)
   expect_set_equal(tab$resampling_id, ids(resamplings))
 })
+
+test_that("warning is given when mlr3 versions mismatch", {
+  test_version_warning = function() {
+    mlr3_version = mlr_reflections$package_version
+    reg = makeExperimentRegistry(NA)
+    batchmark(benchmark_grid(tsk("mtcars"), lrns(c("regr.rpart", "regr.featureless")), rsmp("holdout")))
+    submitJobs()
+    waitForJobs()
+
+    on.exit({mlr_reflections$package_version = mlr3_version}, add = TRUE)
+    mlr_reflections$package_version = "100.0.0"
+
+    capture.output(reduceResultsBatchmark(reg = reg))
+    expect_true(grepl("The mlr3 version", lg$last_event$msg, fixed = TRUE))
+  }
+
+  test_version_warning()
+})

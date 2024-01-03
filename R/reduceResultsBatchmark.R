@@ -63,7 +63,7 @@ reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batch
 
     results = batchtools::reduceResultsList(tab$job.id, reg = reg)
 
-    if (!version_checked && length(results)) {
+    if (!version_checked) {
       version_checked = TRUE
       if (mlr3::mlr_reflections$package_version != results[[1]]$learner_state$mlr3_version) {
         lg$warn(paste(sep = "\n",

@@ -29,7 +29,7 @@ reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batch
   tabs = split(tabs, by = "job.name")
   bmr = mlr3::BenchmarkResult$new()
 
-  no_warning_given = TRUE
+  version_checked = FALSE
 
   for (tab in tabs) {
     job = batchtools::makeJob(tab$job.id[1L], reg = reg)
@@ -63,13 +63,14 @@ reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batch
 
     results = batchtools::reduceResultsList(tab$job.id, reg = reg)
 
-    if (no_warning_given & length(results) && mlr3::mlr_reflections$package_version != results[[1]]$learner_state$mlr3_version) {
-      lg$warn(paste(sep = "\n",
-        "The mlr3 version (%s) from one of the trained learners differs from the currently loaded mlr3 version (%s).",
-        "This can lead to unexpected behavior and we recommend installing the package versions used during experiment exectution."),
-        results[[1]]$learner_state$mlr3_version, mlr3::mlr_reflections$package_version)
-
-      no_warning_given = FALSE
+    if (!version_checked && length(results)) {
+      version_checked = TRUE
+      if (mlr3::mlr_reflections$package_version != results[[1]]$learner_state$mlr3_version) {
+        lg$warn(paste(sep = "\n",
+          "The mlr3 version (%s) from one of the trained learners differs from the currently loaded mlr3 version (%s).",
+          "This can lead to unexpected behavior and we recommend installing the package versions used during experiment exectution."),
+          results[[1]]$learner_state$mlr3_version, mlr3::mlr_reflections$package_version)
+      }
     }
 
     rdata = mlr3::ResultData$new(data.table(

@@ -33,21 +33,17 @@ test_that("reduceResultsBatchmark", {
 })
 
 test_that("warning is given when mlr3 versions mismatch", {
-  test_version_warning = function() {
-    mlr_reflections = mlr3::mlr_reflections
-    mlr3_version = mlr_reflections$package_version
-    reg = makeExperimentRegistry(NA)
-    batchmark(benchmark_grid(tsk("mtcars"), lrn("regr.featureless"), rsmp("holdout")))
-    submitJobs()
-    waitForJobs()
+  mlr_reflections = mlr3::mlr_reflections
+  mlr3_version = mlr_reflections$package_version
+  reg = makeExperimentRegistry(NA)
+  batchmark(benchmark_grid(tsk("mtcars"), lrn("regr.featureless"), rsmp("holdout")))
+  submitJobs()
+  waitForJobs()
 
-    on.exit({mlr_reflections$package_version = mlr3_version}, add = TRUE)
+  on.exit({mlr_reflections$package_version = mlr3_version}, add = TRUE)
 
-    mlr_reflections$package_version = "100.0.0"
+  mlr_reflections$package_version = "100.0.0"
 
-    capture.output(reduceResultsBatchmark(reg = reg))
-    expect_true(grepl("The mlr3 version", lg$last_event$msg, fixed = TRUE))
-  }
-
-  test_version_warning()
+  capture.output(reduceResultsBatchmark(reg = reg))
+  expect_true(grepl("The mlr3 version", lg$last_event$msg, fixed = TRUE))
 })

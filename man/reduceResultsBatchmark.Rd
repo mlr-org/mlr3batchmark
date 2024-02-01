@@ -30,6 +30,9 @@ in a future release.}
 
 \item{reg}{[\code{\link[batchtools]{Registry}}]\cr
 Registry. If not explicitly passed, uses the default registry (see \code{\link[batchtools]{setDefaultRegistry}}).}
+
+\item{unmarshal}{\code{\link[mlr3]{Learner}}\cr
+Whether to unmarshal the learner.}
 }
 \value{
 \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}.

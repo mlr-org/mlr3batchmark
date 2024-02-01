@@ -7,7 +7,8 @@
 reduceResultsBatchmark(
   ids = NULL,
   store_backends = TRUE,
-  reg = batchtools::getDefaultRegistry()
+  reg = batchtools::getDefaultRegistry(),
+  unmarshal = TRUE
 )
 }
 \arguments{

@@ -10,7 +10,7 @@ test_that("reduceResultsBatchmark", {
   )
 
   reg = batchtools::makeExperimentRegistry(NA)
-  batchmark(design, reg = reg)
+  batchmark(design, reg = reg, store_models=TRUE)
   batchtools::submitJobs(reg = reg)
   batchtools::waitForJobs(reg = reg)
 
@@ -30,6 +30,17 @@ test_that("reduceResultsBatchmark", {
   tab = bmr$resamplings
   expect_data_table(tab, nrow = 4)
   expect_set_equal(tab$resampling_id, ids(resamplings))
+
+  rpart_model = function(b){
+    b$score()[learner_id == "classif.rpart"]$learner[[1]]$model
+  }
+  expect_is(rpart_model(bmr), "rpart")
+  no_models = reduceResultsBatchmark(reg = reg, fun = function(L){
+    L$learner_state$model = NULL
+    L
+  })
+  expect_null(rpart_model(no_models))
+  
 })
 
 test_that("warning is given when mlr3 versions mismatch", {

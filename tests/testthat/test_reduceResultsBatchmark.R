@@ -10,7 +10,7 @@ test_that("reduceResultsBatchmark", {
   )
 
   reg = batchtools::makeExperimentRegistry(NA)
-  batchmark(design, reg = reg, store_models=TRUE)
+  batchmark(design, reg = reg, store_models = TRUE)
   batchtools::submitJobs(reg = reg)
   batchtools::waitForJobs(reg = reg)
 

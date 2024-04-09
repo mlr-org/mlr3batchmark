@@ -14,7 +14,7 @@
 #'
 #' @return [mlr3::BenchmarkResult].
 #' @export
-reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batchtools::getDefaultRegistry()) { # nolint
+reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batchtools::getDefaultRegistry(), fun=NULL) { # nolint
   if (is.null(ids)) {
     ids = batchtools::findDone(ids, reg = reg)
   } else {
@@ -61,7 +61,7 @@ reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batch
       learner = get_export(needle, reg)
     }
 
-    results = batchtools::reduceResultsList(tab$job.id, reg = reg)
+    results = batchtools::reduceResultsList(tab$job.id, reg = reg, fun = fun)
 
     if (!version_checked) {
       version_checked = TRUE

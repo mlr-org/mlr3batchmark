@@ -89,7 +89,7 @@ test_that("failing jobs", {
 
 test_that("marshaling", {
   reg = batchtools::makeExperimentRegistry(NA)
-  batchmark(benchmark_grid(tsk("iris"), lrn("classif.lily"), rsmp("holdout")), store_models = TRUE)
+  batchmark(benchmark_grid(tsk("iris"), lrn("classif.debug"), rsmp("holdout")), store_models = TRUE)
   submitJobs()
   bmr_unmarshaled = reduceResultsBatchmark(unmarshal = TRUE)
   bmr_marshaled = reduceResultsBatchmark(unmarshal = FALSE)

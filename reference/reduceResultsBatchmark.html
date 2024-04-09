@@ -66,7 +66,8 @@ Instead, try to robustify your jobs by using a fallback learner (c.f. <a href="h
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">reduceResultsBatchmark</span><span class="op">(</span></span>
 <span>  ids <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  store_backends <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  reg <span class="op">=</span> <span class="fu">batchtools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/batchtools/man/getDefaultRegistry.html" class="external-link">getDefaultRegistry</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  reg <span class="op">=</span> <span class="fu">batchtools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/batchtools/man/getDefaultRegistry.html" class="external-link">getDefaultRegistry</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  fun <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -95,6 +96,12 @@ in a future release.</p></dd>
 <dt>reg</dt>
 <dd><p>[<code><a href="https://rdrr.io/pkg/batchtools/man/makeRegistry.html" class="external-link">Registry</a></code>]<br>
 Registry. If not explicitly passed, uses the default registry (see <code><a href="https://rdrr.io/pkg/batchtools/man/getDefaultRegistry.html" class="external-link">setDefaultRegistry</a></code>).</p></dd>
+
+
+<dt>fun</dt>
+<dd><p>[<code>function</code>]<br>
+Function to apply to each result. The result is passed unnamed as first argument. If <code>NULL</code>, the identity is used.
+If the function has the formal argument “job”, the <code><a href="https://rdrr.io/pkg/batchtools/man/JobExperiment.html" class="external-link">Job</a></code>/<code><a href="https://rdrr.io/pkg/batchtools/man/JobExperiment.html" class="external-link">Experiment</a></code> is also passed to the function.</p></dd>
 
 </dl></div>
     <div id="value">

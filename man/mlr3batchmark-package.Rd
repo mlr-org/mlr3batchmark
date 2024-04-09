@@ -25,4 +25,9 @@ Authors:
   \item Michel Lang \email{michellang@gmail.com} (\href{https://orcid.org/0000-0001-9754-0393}{ORCID})
 }
 
+Other contributors:
+\itemize{
+  \item Toby Hocking (\href{https://orcid.org/0000-0002-3146-0865}{ORCID}) [contributor]
+}
+
 }

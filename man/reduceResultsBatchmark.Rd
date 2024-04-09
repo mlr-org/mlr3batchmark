@@ -9,6 +9,7 @@ reduceResultsBatchmark(
   store_backends = TRUE,
   reg = batchtools::getDefaultRegistry(),
   unmarshal = TRUE
+  fun = NULL
 )
 }
 \arguments{
@@ -30,9 +31,11 @@ in a future release.}
 
 \item{reg}{[\code{\link[batchtools]{Registry}}]\cr
 Registry. If not explicitly passed, uses the default registry (see \code{\link[batchtools]{setDefaultRegistry}}).}
-
 \item{unmarshal}{\code{\link[mlr3]{Learner}}\cr
 Whether to unmarshal the learner.}
+\item{fun}{[\code{function}]\cr
+Function to apply to each result. The result is passed unnamed as first argument. If \code{NULL}, the identity is used.
+If the function has the formal argument \dQuote{job}, the \code{\link[batchtools]{Job}}/\code{\link[batchtools]{Experiment}} is also passed to the function.}
 }
 \value{
 \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}.

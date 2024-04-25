@@ -9,6 +9,7 @@ run_learner = function(job, data, learner_hash, store_models, ...) {
     learner = learner,
     resampling = resampling,
     store_models = store_models,
-    lgr_threshold = lgr::get_logger("mlr3")$threshold
+    lgr_threshold = lgr::get_logger("mlr3")$threshold,
+    is_sequential = FALSE
   )
 }

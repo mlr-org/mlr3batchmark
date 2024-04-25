@@ -14,7 +14,8 @@
 #'
 #' @return [mlr3::BenchmarkResult].
 #' @export
-reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batchtools::getDefaultRegistry(), fun=NULL) { # nolint
+reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batchtools::getDefaultRegistry(), fun = NULL, unmarshal = TRUE) { # nolint
+  assert_flag(unmarshal)
   if (is.null(ids)) {
     ids = batchtools::findDone(ids, reg = reg)
   } else {
@@ -85,6 +86,10 @@ reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batch
       uhash = tab$job.name
     ), store_backends = store_backends)
     bmr$combine(mlr3::BenchmarkResult$new(rdata))
+  }
+
+  if (unmarshal) {
+    bmr$unmarshal()
   }
 
   return(bmr)

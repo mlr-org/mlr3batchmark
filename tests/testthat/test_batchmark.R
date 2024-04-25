@@ -86,3 +86,14 @@ test_that("failing jobs", {
   expect_data_table(as.data.table(results), nrow = 8L)
   expect_error(reduceResultsBatchmark(reg = reg, ids = ids), "successfully computed")
 })
+
+test_that("marshaling", {
+  reg = batchtools::makeExperimentRegistry(NA)
+  batchmark(benchmark_grid(tsk("iris"), lrn("classif.debug"), rsmp("holdout")), store_models = TRUE)
+  submitJobs()
+  bmr_unmarshaled = reduceResultsBatchmark(unmarshal = TRUE)
+  bmr_marshaled = reduceResultsBatchmark(unmarshal = FALSE)
+
+  expect_true(bmr_marshaled$resample_result(1)$learners[[1]]$marshaled)
+  expect_false(bmr_unmarshaled$resample_result(1)$learners[[1]]$marshaled)
+})

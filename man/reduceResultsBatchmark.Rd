@@ -8,7 +8,8 @@ reduceResultsBatchmark(
   ids = NULL,
   store_backends = TRUE,
   reg = batchtools::getDefaultRegistry(),
-  fun = NULL
+  fun = NULL,
+  unmarshal = TRUE
 )
 }
 \arguments{
@@ -34,6 +35,12 @@ Registry. If not explicitly passed, uses the default registry (see \code{\link[b
 \item{fun}{[\code{function}]\cr
 Function to apply to each result. The result is passed unnamed as first argument. If \code{NULL}, the identity is used.
 If the function has the formal argument \dQuote{job}, the \code{\link[batchtools]{Job}}/\code{\link[batchtools]{Experiment}} is also passed to the function.}
+
+\item{unmarshal}{\code{\link[mlr3]{Learner}}\cr
+Whether to unmarshal learners that were marshaled during the execution.
+Setting this to \code{FALSE} does not guarantee that the learners are marshaled.
+For example, with sequential execution and no encapsulation, marshaling is not necessary.
+If you want to ensure that all learners are in marshaled form, you need to call \verb{$marshal()} on the result object.}
 }
 \value{
 \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}.

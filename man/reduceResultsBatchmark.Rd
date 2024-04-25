@@ -37,7 +37,10 @@ Function to apply to each result. The result is passed unnamed as first argument
 If the function has the formal argument \dQuote{job}, the \code{\link[batchtools]{Job}}/\code{\link[batchtools]{Experiment}} is also passed to the function.}
 
 \item{unmarshal}{\code{\link[mlr3]{Learner}}\cr
-Whether to unmarshal the learner.}
+Whether to unmarshal learners that were marshaled during the execution.
+Setting this to \code{FALSE} does not guarantee that the learners are marshaled.
+For example, with sequential execution and no encapsulation, marshaling is not necessary.
+If you want to ensure that all learners are in marshaled form, you need to call \verb{$marshal()} on the result object.}
 }
 \value{
 \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}.

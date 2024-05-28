@@ -46,8 +46,7 @@ If you want to ensure that all learners are in marshaled form, you need to call 
 \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}.
 }
 \description{
-Collect the results from jobs defined via \code{\link[=batchmark]{batchmark()}} and combine them into
-a \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}.
+Collect the results from jobs defined via \code{\link[=batchmark]{batchmark()}} and combine them into a \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult}.
 
 Note that \code{ids} defaults to finished jobs (as reported by \code{\link[batchtools:findJobs]{batchtools::findDone()}}).
 If a job threw an error, is expired or is still running, it will be ignored with this default.

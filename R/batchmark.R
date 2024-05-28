@@ -35,7 +35,7 @@
 #' reduceResultsBatchmark(reg = reg)
 batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultRegistry()) {
   design = as.data.table(assert_data_frame(design, min.rows = 1L))
-  assert_names(names(design), permutation.of = c("task", "learner", "resampling"))
+  assert_names(names(design), must.include = c("task", "learner", "resampling"))
   assert_flag(store_models)
   batchtools::assertRegistry(reg, class = "ExperimentRegistry", writeable = TRUE, sync = TRUE,
     running.ok = FALSE)
@@ -53,10 +53,22 @@ batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultR
     batchtools::addAlgorithm("run_learner", fun = run_learner, reg = reg)
   }
 
-  # group per problem to speed up addExperiments()
+  # set hashes
   set(design, j = "task_hash", value = map_chr(design$task, "hash"))
   set(design, j = "learner_hash", value = map_chr(design$learner, "hash"))
   set(design, j = "resampling_hash", value = map_chr(design$resampling, "hash"))
+
+  # expand with param values
+  if (is.null(design$param_values)) {
+    design$param_values = list()
+  } else {
+    design$param_values = list(assert_param_values(design$param_values, n_learners = length(design$learner)))
+    task = learner = resampling = NULL
+    design = design[, list(task, learner, resampling, param_values = unlist(get("param_values"), recursive = FALSE)), by = c("learner_hash", "task_hash", "resampling_hash")]
+  }
+  design[, "param_values_hash" := map(get("param_values"), calculate_hash)]
+
+  # group per problem to speed up addExperiments()
   design[, "group" := .GRP, by = c("task_hash", "resampling_hash")]
 
   groups = unique(design$group)
@@ -85,13 +97,23 @@ batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultR
       exports = c(exports, learner_hashes[i])
     }
 
+    param_values_hashes = tab$param_values_hash
+    for (i in which(param_values_hashes %nin% exports)) {
+      batchtools::batchExport(export = set_names(list(tab$param_values[[i]]), param_values_hashes[i]), reg = reg)
+      exports = c(exports, param_values_hashes[i])
+    }
+
     prob_design = data.table(
-      task_hash = task_hash, task_id = task$id,
-      resampling_hash = resampling_hash, resampling_id = resampling$id
+      task_hash = task_hash,
+      task_id = task$id,
+      resampling_hash = resampling_hash,
+      resampling_id = resampling$id
     )
 
     algo_design = data.table(
-      learner_hash = learner_hashes, learner_id = map_chr(tab$learner, "id"),
+      learner_hash = learner_hashes,
+      learner_id = map_chr(tab$learner, "id"),
+      param_values_hash = param_values_hashes,
       store_models = store_models
     )
 

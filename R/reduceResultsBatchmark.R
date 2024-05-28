@@ -1,8 +1,7 @@
 #' @title Collect Results from batchmark
 #'
 #' @description
-#' Collect the results from jobs defined via [batchmark()] and combine them into
-#' a [mlr3::BenchmarkResult].
+#' Collect the results from jobs defined via [batchmark()] and combine them into a [mlr3::BenchmarkResult].
 #'
 #' Note that `ids` defaults to finished jobs (as reported by [batchtools::findDone()]).
 #' If a job threw an error, is expired or is still running, it will be ignored with this default.

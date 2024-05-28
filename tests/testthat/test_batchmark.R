@@ -97,3 +97,32 @@ test_that("marshaling", {
   expect_true(bmr_marshaled$resample_result(1)$learners[[1]]$marshaled)
   expect_false(bmr_unmarshaled$resample_result(1)$learners[[1]]$marshaled)
 })
+
+test_that("adding parameter values works", {
+  tasks = tsks(c("iris", "spam"))
+  resamplings = list(rsmp("cv", folds = 3)$instantiate(tasks[[1]]))
+  learners = lrns("classif.debug")
+
+  design = data.table(
+    task = tasks,
+    learner = learners,
+    resampling = resamplings,
+    param_values = list(list(list(x = 1), list(x = 0.5))))
+
+  reg = batchtools::makeExperimentRegistry(NA, make.default = FALSE)
+
+  ids = batchmark(design, reg = reg)
+  expect_data_table(ids, ncol = 1L, nrows = 12L)
+  ids = batchtools::submitJobs(reg = reg)
+  batchtools::waitForJobs(reg = reg)
+  expect_data_table(ids, nrows = 12)
+
+  logs = batchtools::getErrorMessages(reg = reg)
+  expect_data_table(logs, nrows = 0L)
+  results = reduceResultsBatchmark(reg = reg)
+  expect_is(results, "BenchmarkResult")
+  expect_benchmark_result(results)
+  expect_data_table(as.data.table(results), nrow = 12L)
+  expect_equal(results$learners$learner[[1]]$param_set$values$x, 1)
+  expect_equal(results$learners$learner[[2]]$param_set$values$x, 0.5)
+})

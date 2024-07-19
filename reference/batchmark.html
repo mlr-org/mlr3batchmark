@@ -10,7 +10,7 @@ which returns a mlr3::BenchmarkResult and thus to return to the interface of mlr
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -38,20 +38,20 @@ which returns a mlr3::BenchmarkResult and thus to return to the interface of mlr
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/mlr-org/mlr3batchmark/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Benchmark Experiments on Batch Systems</h1>
-    <small class="dont-index">Source: <a href="https://github.com/mlr-org/mlr3batchmark/blob/HEAD/R/batchmark.R" class="external-link"><code>R/batchmark.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/mlr-org/mlr3batchmark/blob/main/R/batchmark.R" class="external-link"><code>R/batchmark.R</code></a></small>
     <div class="hidden name"><code>batchmark.Rd</code></div>
     </div>
 
@@ -72,7 +72,9 @@ which returns a <a href="https://mlr3.mlr-org.com/reference/BenchmarkResult.html
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>design</dt>
+
+
+<dl><dt id="arg-design">design<a class="anchor" aria-label="anchor" href="#arg-design"></a></dt>
 <dd><p>(<code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame()</a></code>)<br>
 Data frame (or <code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code>) with three columns: "task", "learner", and "resampling".
 Each row defines a resampling by providing a <a href="https://mlr3.mlr-org.com/reference/Task.html" class="external-link">Task</a>, <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">Learner</a> and an instantiated <a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">Resampling</a> strategy.
@@ -81,22 +83,20 @@ instantiate the <a href="https://mlr3.mlr-org.com/reference/Resampling.html" cla
 Additionally, you can set the additional column 'param_values', see <code><a href="https://mlr3.mlr-org.com/reference/benchmark_grid.html" class="external-link">benchmark_grid()</a></code>.</p></dd>
 
 
-<dt>store_models</dt>
+<dt id="arg-store-models">store_models<a class="anchor" aria-label="anchor" href="#arg-store-models"></a></dt>
 <dd><p>(<code>logical(1)</code>)<br>
 Store the fitted model in the resulting object=
 Set to <code>TRUE</code> if you want to further analyse the models or want to
 extract information like variable importance.</p></dd>
 
 
-<dt>reg</dt>
+<dt id="arg-reg">reg<a class="anchor" aria-label="anchor" href="#arg-reg"></a></dt>
 <dd><p><a href="https://rdrr.io/pkg/batchtools/man/makeExperimentRegistry.html" class="external-link">batchtools::ExperimentRegistry</a>.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p><code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table()</a></code> with ids of created jobs (invisibly).</p>
+    <p><code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table()</a></code> with ids of created jobs (invisibly).</p>
     </div>
 
     <div id="ref-examples">
@@ -113,23 +113,23 @@ extract information like variable importance.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">reg</span> <span class="op">=</span> <span class="fu">batchtools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/batchtools/man/makeExperimentRegistry.html" class="external-link">makeExperimentRegistry</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> No readable configuration file found</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Created registry in '/tmp/RtmpcTxtlz/registry59442894c4ac' using cluster functions 'Interactive'</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Created registry in '/tmp/Rtmp4iPsQn/registry59a61fd274c9' using cluster functions 'Interactive'</span>
 <span class="r-in"><span><span class="fu">batchmark</span><span class="op">(</span><span class="va">design</span>, reg <span class="op">=</span> <span class="va">reg</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding algorithm 'run_learner'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding problem 'b39ef23a66b1f1ee'</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding problem '34a6beb27c3181c3'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: 'a3b4bd84a3ce5fce' ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: '7c35d835f3dfae37' ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: '70dd22724e5c724d' ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: '3431cc630a37510b' ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: '838c80b890e1544a' ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: 'ecf8ee265ec56766' ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Overwriting previously exported object: 'ecf8ee265ec56766'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 6 experiments ('b39ef23a66b1f1ee'[1] x 'run_learner'[2] x repls[3]) ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 6 experiments ('34a6beb27c3181c3'[1] x 'run_learner'[2] x repls[3]) ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: '681f547de0d0db2f' ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 2 experiments ('b39ef23a66b1f1ee'[1] x 'run_learner'[2] x repls[1]) ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding problem '76c4fc7a533d41b7'</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 2 experiments ('34a6beb27c3181c3'[1] x 'run_learner'[2] x repls[1]) ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding problem 'c0fcb04583948144'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: 'cc50b6407545c334' ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 6 experiments ('76c4fc7a533d41b7'[1] x 'run_learner'[2] x repls[3]) ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 6 experiments ('c0fcb04583948144'[1] x 'run_learner'[2] x repls[3]) ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: 'e73b91a46604b440' ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 2 experiments ('76c4fc7a533d41b7'[1] x 'run_learner'[2] x repls[1]) ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 2 experiments ('c0fcb04583948144'[1] x 'run_learner'[2] x repls[1]) ...</span>
 <span class="r-in"><span><span class="fu">batchtools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/batchtools/man/submitJobs.html" class="external-link">submitJobs</a></span><span class="op">(</span>reg <span class="op">=</span> <span class="va">reg</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Submitting 16 jobs in 16 chunks using cluster functions 'Interactive' ...</span>
 <span class="r-in"><span></span></span>
@@ -158,15 +158,15 @@ extract information like variable importance.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 

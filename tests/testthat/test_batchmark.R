@@ -123,6 +123,9 @@ test_that("adding parameter values works", {
   expect_is(results, "BenchmarkResult")
   expect_benchmark_result(results)
   expect_data_table(as.data.table(results), nrow = 12L)
-  expect_equal(results$learners$learner[[1]]$param_set$values$x, 1)
-  expect_equal(results$learners$learner[[2]]$param_set$values$x, 0.5)
+
+  expect_set_equal(
+    map_dbl(results$learners$learner, function(x) x$param_set$values$x),
+    c(0.5, 1)
+  )
 })

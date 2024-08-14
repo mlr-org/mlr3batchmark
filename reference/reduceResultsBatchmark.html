@@ -108,9 +108,8 @@ If the function has the formal argument “job”, the <code><a href="https://rd
 <dt id="arg-unmarshal">unmarshal<a class="anchor" aria-label="anchor" href="#arg-unmarshal"></a></dt>
 <dd><p><code><a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">Learner</a></code><br>
 Whether to unmarshal learners that were marshaled during the execution.
-Setting this to <code>FALSE</code> does not guarantee that the learners are marshaled.
-For example, with sequential execution and no encapsulation, marshaling is not necessary.
-If you want to ensure that all learners are in marshaled form, you need to call <code>$marshal()</code> on the result object.</p></dd>
+If <code>TRUE</code> all models are stored in unmarshaled form.
+If <code>FALSE</code>, all learners (that need marshaling) are stored in marshaled form.</p></dd>
 
 </dl></div>
     <div id="value">

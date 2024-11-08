@@ -33,7 +33,7 @@
 #' batchtools::submitJobs(reg = reg)
 #'
 #' reduceResultsBatchmark(reg = reg)
-batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultRegistry()) {
+batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultRegistry(), renv_project = NULL) {
   design = as.data.table(assert_data_frame(design, min.rows = 1L))
   assert_names(names(design), must.include = c("task", "learner", "resampling"))
   assert_flag(store_models)
@@ -114,7 +114,8 @@ batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultR
       learner_hash = learner_hashes,
       learner_id = map_chr(tab$learner, "id"),
       param_values_hash = param_values_hashes,
-      store_models = store_models
+      store_models = store_models,
+      renv_project = renv_project
     )
 
     ids[[g]] = batchtools::addExperiments(

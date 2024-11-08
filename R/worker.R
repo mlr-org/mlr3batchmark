@@ -1,4 +1,7 @@
-run_learner = function(job, data, learner_hash, param_values_hash, store_models, ...) {
+run_learner = function(job, data, learner_hash, param_values_hash, store_models, renv_project = NULL, ...) {
+  if (!is.null(renv_project)) {
+    renv::load(renv_project)
+  }
   workhorse = utils::getFromNamespace("workhorse", ns = asNamespace("mlr3"))
   resampling = get(job$prob.pars$resampling_hash, envir = .GlobalEnv)
   learner = get(learner_hash, envir = .GlobalEnv)

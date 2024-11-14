@@ -14,6 +14,9 @@
 #'
 #' @inheritParams mlr3::benchmark
 #' @param reg [batchtools::ExperimentRegistry].
+#' @param renv_project `character(1)`\cr
+#' Path to a renv project.
+#' If not `NULL`, the renv project is activated in the job environment.
 #'
 #' @return [data.table()] with ids of created jobs (invisibly).
 #' @export
@@ -37,8 +40,11 @@ batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultR
   design = as.data.table(assert_data_frame(design, min.rows = 1L))
   assert_names(names(design), must.include = c("task", "learner", "resampling"))
   assert_flag(store_models)
-  batchtools::assertRegistry(reg, class = "ExperimentRegistry", writeable = TRUE, sync = TRUE,
-    running.ok = FALSE)
+  batchtools::assertRegistry(reg, class = "ExperimentRegistry", writeable = TRUE, sync = TRUE, running.ok = FALSE)
+  if (!is.null(renv_project)) {
+    require_namespaces("renv")
+    assert_directory_exists(renv_project)
+  }
 
   assert_list(design$task, "Task")
   assert_list(design$learner, "Learner")

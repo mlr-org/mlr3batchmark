@@ -3,6 +3,9 @@ run_learner = function(job, data, learner_hash, param_values_hash, store_models,
     renv::load(renv_project)
   }
 
+  message(sprintf("Loaded renv project %s", renv::project()))
+  message(sprintf("Passed renv project %s", renv_project))
+
   Sys.sleep(30)
 
   workhorse = utils::getFromNamespace("workhorse", ns = asNamespace("mlr3"))

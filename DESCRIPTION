@@ -27,6 +27,7 @@ Imports:
     mlr3misc,
     uuid
 Suggests:
+    renv,
     rpart,
     testthat
 Encoding: UTF-8

@@ -129,3 +129,19 @@ test_that("adding parameter values works", {
     c(0.5, 1)
   )
 })
+
+# test_that("renv_project works", {
+#   tasks = list(mlr3::tsk("iris"), mlr3::tsk("sonar"))
+#   learners = list(mlr3::lrn("classif.featureless"), mlr3::lrn("classif.rpart"))
+#   resamplings = list(mlr3::rsmp("cv", folds = 3), mlr3::rsmp("holdout"))
+
+#   design = mlr3::benchmark_grid(
+#     tasks = tasks,
+#     learners = learners,
+#     resamplings = resamplings
+#   )
+
+#   reg = batchtools::makeExperimentRegistry(NA, make.default = FALSE)
+#   batchmark(design, reg = reg, renv_project = ".")
+#   batchtools::submitJobs(reg = reg)
+# })

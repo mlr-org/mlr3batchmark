@@ -1,4 +1,4 @@
-# mlr3batchmark (development version)
+# mlr3batchmark 0.2.0
 
 * feat: The design of `batchmark()` can now include parameter settings.
 * feat: `reduceResultsBatchmark` gains argument `fun` which is passed on to `batchtools::reduceResultsList`.

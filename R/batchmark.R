@@ -18,7 +18,7 @@
 #' Path to a renv project.
 #' If not `NULL`, the renv project is activated in the job environment.
 #'
-#' @return [data.table()] with ids of created jobs (invisibly).
+#' @return [data.table::data.table()] with ids of created jobs (invisibly).
 #' @export
 #' @examples
 #' tasks = list(mlr3::tsk("iris"), mlr3::tsk("sonar"))

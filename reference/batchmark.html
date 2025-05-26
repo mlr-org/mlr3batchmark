@@ -24,7 +24,7 @@ which returns a mlr3::BenchmarkResult and thus to return to the interface of mlr
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mlr3batchmark</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
       </span>
     </div>
 
@@ -81,7 +81,7 @@ which returns a <a href="https://mlr3.mlr-org.com/reference/BenchmarkResult.html
 
 <dl><dt id="arg-design">design<a class="anchor" aria-label="anchor" href="#arg-design"></a></dt>
 <dd><p>(<code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame()</a></code>)<br>
-Data frame (or <code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table::data.table()</a></code>) with three columns: "task", "learner", and "resampling".
+Data frame (or <code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code>) with three columns: "task", "learner", and "resampling".
 Each row defines a resampling by providing a <a href="https://mlr3.mlr-org.com/reference/Task.html" class="external-link">Task</a>, <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">Learner</a> and an instantiated <a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">Resampling</a> strategy.
 The helper function <code><a href="https://mlr3.mlr-org.com/reference/benchmark_grid.html" class="external-link">benchmark_grid()</a></code> can assist in generating an exhaustive design (see examples) and
 instantiate the <a href="https://mlr3.mlr-org.com/reference/Resampling.html" class="external-link">Resampling</a>s per <a href="https://mlr3.mlr-org.com/reference/Task.html" class="external-link">Task</a>.
@@ -107,7 +107,7 @@ If not <code>NULL</code>, the renv project is activated in the job environment.<
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table()</a></code> with ids of created jobs (invisibly).</p>
+    <p><code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code> with ids of created jobs (invisibly).</p>
     </div>
 
     <div id="ref-examples">
@@ -124,23 +124,23 @@ If not <code>NULL</code>, the renv project is activated in the job environment.<
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">reg</span> <span class="op">=</span> <span class="fu">batchtools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/batchtools/man/makeExperimentRegistry.html" class="external-link">makeExperimentRegistry</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> No readable configuration file found</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Created registry in '/tmp/RtmpSrAgTU/registry56ec65e2b76b' using cluster functions 'Interactive'</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Created registry in '/tmp/RtmpmoJoYE/registry5c1958341b47' using cluster functions 'Interactive'</span>
 <span class="r-in"><span><span class="fu">batchmark</span><span class="op">(</span><span class="va">design</span>, reg <span class="op">=</span> <span class="va">reg</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding algorithm 'run_learner'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding problem '60543108f51f96bb'</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding problem '209774f39ea0fcb1'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: 'a3b4bd84a3ce5fce' ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: '6fe399738b0bc031' ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: '5a6e9ea78253ec9a' ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: 'ecf8ee265ec56766' ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Overwriting previously exported object: 'ecf8ee265ec56766'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 6 experiments ('60543108f51f96bb'[1] x 'run_learner'[2] x repls[3]) ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 6 experiments ('209774f39ea0fcb1'[1] x 'run_learner'[2] x repls[3]) ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: '681f547de0d0db2f' ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 2 experiments ('60543108f51f96bb'[1] x 'run_learner'[2] x repls[1]) ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding problem '155b32a350a89fec'</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 2 experiments ('209774f39ea0fcb1'[1] x 'run_learner'[2] x repls[1]) ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding problem '389105c365bf9405'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: 'cc50b6407545c334' ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 6 experiments ('155b32a350a89fec'[1] x 'run_learner'[2] x repls[3]) ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 6 experiments ('389105c365bf9405'[1] x 'run_learner'[2] x repls[3]) ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Exporting new objects: 'e73b91a46604b440' ...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 2 experiments ('155b32a350a89fec'[1] x 'run_learner'[2] x repls[1]) ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding 2 experiments ('389105c365bf9405'[1] x 'run_learner'[2] x repls[1]) ...</span>
 <span class="r-in"><span><span class="fu">batchtools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/batchtools/man/submitJobs.html" class="external-link">submitJobs</a></span><span class="op">(</span>reg <span class="op">=</span> <span class="va">reg</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Submitting 16 jobs in 16 chunks using cluster functions 'Interactive' ...</span>
 <span class="r-in"><span></span></span>
@@ -169,7 +169,7 @@ If not <code>NULL</code>, the renv project is activated in the job environment.<
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>

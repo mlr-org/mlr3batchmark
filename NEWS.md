@@ -1,5 +1,7 @@
 # mlr3batchmark (development version)
 
+* compatibility: mlr3 1.0.0
+
 # mlr3batchmark 0.2.0
 
 * feat: The design of `batchmark()` can now include parameter settings.

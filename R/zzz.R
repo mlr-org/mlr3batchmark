@@ -3,6 +3,7 @@
 #' @import mlr3misc
 #' @rawNamespace import(batchtools, except = chunk)
 #' @importFrom uuid UUIDgenerate
+#' @importFrom utils packageVersion
 "_PACKAGE"
 
 

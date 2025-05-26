@@ -1,4 +1,4 @@
-# mlr3batchmark (development version)
+# mlr3batchmark 0.2.1
 
 * compatibility: mlr3 1.0.0
 

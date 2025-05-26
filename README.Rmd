@@ -8,7 +8,7 @@ output: github_document
 [![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
 [![Mattermost](https://img.shields.io/badge/chat-mattermost-orange.svg)](https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/)
 
-A connector between [mlr3](https://github.com/mlr-org/mlr3) and [batchtools](https://mllg.github.io/batchtools/).
+A connector between [mlr3](https://github.com/mlr-org/mlr3) and [batchtools](http://batchtools.mlr-org.com/).
 This allows to run large-scale benchmark experiments on scheduled high-performance computing clusters.
 
 The package comes with two core functions for switching between `mlr3` and `batchtools` to perform a benchmark:

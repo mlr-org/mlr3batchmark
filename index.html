@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">mlr3batchmark</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.1</span>
       </span>
     </div>
 
@@ -69,7 +69,7 @@
 <div class="page-header"><h1 id="mlr3batchmark">mlr3batchmark<a class="anchor" aria-label="anchor" href="#mlr3batchmark"></a>
 </h1></div>
 <p><a href="https://github.com/mlr-org/mlr3batchmark/actions/workflows/r-cmd-check.yml" class="external-link"><img src="https://github.com/mlr-org/mlr3batchmark/actions/workflows/r-cmd-check.yml/badge.svg" alt="r-cmd-check"></a> <a href="https://CRAN.R-project.org/package=mlr3batchmark" class="external-link"><img src="https://www.r-pkg.org/badges/version/mlr3batchmark" alt="CRAN status"></a> <a href="https://stackoverflow.com/questions/tagged/mlr3" class="external-link"><img src="https://img.shields.io/badge/stackoverflow-mlr3-orange.svg" alt="StackOverflow"></a> <a href="https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/" class="external-link"><img src="https://img.shields.io/badge/chat-mattermost-orange.svg" alt="Mattermost"></a></p>
-<p>A connector between <a href="https://github.com/mlr-org/mlr3" class="external-link">mlr3</a> and <a href="https://mllg.github.io/batchtools/" class="external-link">batchtools</a>. This allows to run large-scale benchmark experiments on scheduled high-performance computing clusters.</p>
+<p>A connector between <a href="https://github.com/mlr-org/mlr3" class="external-link">mlr3</a> and <a href="http://batchtools.mlr-org.com/" class="external-link">batchtools</a>. This allows to run large-scale benchmark experiments on scheduled high-performance computing clusters.</p>
 <p>The package comes with two core functions for switching between <code>mlr3</code> and <code>batchtools</code> to perform a benchmark:</p>
 <ul>
 <li>After creating a <code>design</code> object (as required for <code>mlr3</code>’s <code><a href="https://mlr3.mlr-org.com/reference/benchmark.html" class="external-link">benchmark()</a></code> function), instead of <code><a href="https://mlr3.mlr-org.com/reference/benchmark.html" class="external-link">benchmark()</a></code> call <code><a href="reference/batchmark.html">batchmark()</a></code> which populates an <code>ExperimentRegistry</code> for the computational jobs of the benchmark. You are now in the world of <code>batchtools</code> where you can selectively submit jobs with different resources, monitor the progress or resubmit as needed.</li>
@@ -95,47 +95,72 @@
 <span><span class="va">reg</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/batchtools/man/makeExperimentRegistry.html" class="external-link">makeExperimentRegistry</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="do">## No readable configuration file found</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="do">## Created registry in '/tmp/Rtmp8DlMZQ/registry704553adf7a88' using cluster functions 'Interactive'</span></span></code></pre></div>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="do">## Created registry in '/tmp/RtmpbcuMc4/registry27b8961304f5da' using cluster functions 'Interactive'</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ids</span> <span class="op">=</span> <span class="fu"><a href="reference/batchmark.html">batchmark</a></span><span class="op">(</span><span class="va">design</span>, reg <span class="op">=</span> <span class="va">reg</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="do">## Adding algorithm 'run_learner'</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="do">## Adding problem 'b39ef23a66b1f1ee'</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="do">## Adding problem 'abc694dd29a7a8ce'</span></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="do">## Exporting new objects: '5ec484de3f93431b' ...</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="do">## Exporting new objects: '2da7eeb80b94fc3b' ...</span></span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="do">## Exporting new objects: '7c35d835f3dfae37' ...</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="do">## Exporting new objects: 'c905990877a775af' ...</span></span>
 <span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="do">## Exporting new objects: '70dd22724e5c724d' ...</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="do">## Exporting new objects: '3acc41a799a260d8' ...</span></span>
 <span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="do">## Adding 6 experiments ('b39ef23a66b1f1ee'[1] x 'run_learner'[2] x repls[3]) ...</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="do">## Exporting new objects: 'ecf8ee265ec56766' ...</span></span>
 <span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="do">## Adding problem '76c4fc7a533d41b7'</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="do">## Overwriting previously exported object: 'ecf8ee265ec56766'</span></span>
 <span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="do">## Exporting new objects: 'b209de197d6cbe75' ...</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="do">## Adding 6 experiments ('abc694dd29a7a8ce'[1] x 'run_learner'[2] x repls[3]) ...</span></span>
 <span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="do">## Adding 6 experiments ('76c4fc7a533d41b7'[1] x 'run_learner'[2] x repls[3]) ...</span></span></code></pre></div>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="do">## Adding problem 'f9791e97f9813150'</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="do">## Exporting new objects: '62ac3bb85aabfbaf' ...</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="do">## Adding 6 experiments ('f9791e97f9813150'[1] x 'run_learner'[2] x repls[3]) ...</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/batchtools/man/submitJobs.html" class="external-link">submitJobs</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="do">## Submitting 12 jobs in 12 chunks using cluster functions 'Interactive' ...</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="do">## Submitting 12 jobs in 12 chunks using cluster functions 'Interactive' ...</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="do">## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : </span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="do">##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="do">## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : </span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="do">##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="do">## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : </span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="do">##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="do">## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : </span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="do">##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="do">## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : </span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="do">##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="do">## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : </span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="do">##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="do">## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : </span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="do">##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="do">## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : </span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="do">##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)</span></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="do">## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : </span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="do">##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)</span></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="do">## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : </span></span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="do">##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)</span></span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="do">## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : </span></span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="do">##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)</span></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="do">## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : </span></span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="do">##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/batchtools/man/getStatus.html" class="external-link">getStatus</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">## Status for 12 jobs at 2023-11-13 19:32:20:</span></span>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">## Status for 12 jobs at 2025-05-26 09:23:22:</span></span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="do">##   Submitted    : 12 (100.0%)</span></span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="do">##   -- Queued    :  0 (  0.0%)</span></span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="do">##   -- Started   : 12 (100.0%)</span></span>
 <span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="do">##   ---- Running :  0 (  0.0%)</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="do">##   ---- Done    : 12 (100.0%)</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="do">##   ---- Error   :  0 (  0.0%)</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="do">##   ---- Done    :  0 (  0.0%)</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="do">##   ---- Error   : 12 (100.0%)</span></span>
 <span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="do">##   ---- Expired :  0 (  0.0%)</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/reduceResultsBatchmark.html">reduceResultsBatchmark</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="do">## &lt;BenchmarkResult&gt; of 12 rows with 4 resampling runs</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="do">##  nr task_id          learner_id resampling_id iters warnings errors</span></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="do">##   1    iris classif.featureless            cv     3        0      0</span></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="do">##   2    iris       classif.rpart            cv     3        0      0</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="do">##   3   sonar classif.featureless            cv     3        0      0</span></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="do">##   4   sonar       classif.rpart            cv     3        0      0</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="do">## ── &lt;BenchmarkResult&gt; of 0 rows with 0 resampling run ───────────────────────────</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a>

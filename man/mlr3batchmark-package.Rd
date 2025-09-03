@@ -11,7 +11,7 @@ Extends the 'mlr3' package with a connector to the package 'batchtools'. This al
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https:///mlr3batchmark.mlr-org.com}
+  \item \url{https://mlr3batchmark.mlr-org.com}
   \item \url{https://github.com/mlr-org/mlr3batchmark}
   \item Report bugs at \url{https://github.com/mlr-org/mlr3batchmark/issues}
 }

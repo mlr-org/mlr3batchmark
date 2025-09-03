@@ -1,6 +1,6 @@
 Package: mlr3batchmark
 Title: Batch Experiments for 'mlr3'
-Version: 0.2.1.9000
+Version: 0.2.2
 Authors@R: c(
     person("Marc", "Becker", , "marcbecker@posteo.de", role = c("cre", "aut"),
            comment = c(ORCID = "0000-0002-8115-0400")),
@@ -13,7 +13,7 @@ Description: Extends the 'mlr3' package with a connector to the package
     'batchtools'. This allows to run large-scale benchmark experiments on
     scheduled high-performance computing clusters.
 License: LGPL-3
-URL: https:///mlr3batchmark.mlr-org.com,
+URL: https://mlr3batchmark.mlr-org.com,
     https://github.com/mlr-org/mlr3batchmark
 BugReports: https://github.com/mlr-org/mlr3batchmark/issues
 Depends:

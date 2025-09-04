@@ -21,7 +21,7 @@ Instead, try to robustify your jobs by using a fallback learner (c.f. mlr3::Lear
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mlr3batchmark</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.2</span>
       </span>
     </div>
 
@@ -54,7 +54,7 @@ Instead, try to robustify your jobs by using a fallback learner (c.f. mlr3::Lear
 
     <div class="ref-description">
     <p>Collect the results from jobs defined via <code><a href="batchmark.html">batchmark()</a></code> and combine them into a <a href="https://mlr3.mlr-org.com/reference/BenchmarkResult.html" class="external-link">mlr3::BenchmarkResult</a>.</p>
-<p>Note that <code>ids</code> defaults to finished jobs (as reported by <code><a href="https://rdrr.io/pkg/batchtools/man/findJobs.html" class="external-link">batchtools::findDone()</a></code>).
+<p>Note that <code>ids</code> defaults to finished jobs (as reported by <code><a href="https://batchtools.mlr-org.com/reference/findJobs.html" class="external-link">batchtools::findDone()</a></code>).
 If a job threw an error, is expired or is still running, it will be ignored with this default.
 Just leaving these jobs out in an analysis is <strong>not</strong> statistically sound.
 Instead, try to robustify your jobs by using a fallback learner (c.f. <a href="https://mlr3.mlr-org.com/reference/Learner.html" class="external-link">mlr3::Learner</a>).</p>
@@ -64,7 +64,7 @@ Instead, try to robustify your jobs by using a fallback learner (c.f. <a href="h
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">reduceResultsBatchmark</span><span class="op">(</span></span>
 <span>  ids <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  store_backends <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  reg <span class="op">=</span> <span class="fu">batchtools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/batchtools/man/getDefaultRegistry.html" class="external-link">getDefaultRegistry</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  reg <span class="op">=</span> <span class="fu">batchtools</span><span class="fu">::</span><span class="fu"><a href="https://batchtools.mlr-org.com/reference/getDefaultRegistry.html" class="external-link">getDefaultRegistry</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  fun <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  unmarshal <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -79,7 +79,7 @@ Instead, try to robustify your jobs by using a fallback learner (c.f. <a href="h
 A <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></code> (or <code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></code>)
 with a column named “job.id”.
 Alternatively, you may also pass a vector of integerish job ids.
-If not set, defaults to the return value of <code><a href="https://rdrr.io/pkg/batchtools/man/findJobs.html" class="external-link">findDone</a></code>.
+If not set, defaults to the return value of <code><a href="https://batchtools.mlr-org.com/reference/findJobs.html" class="external-link">findDone</a></code>.
 Invalid ids are ignored.</p></dd>
 
 
@@ -95,14 +95,14 @@ in a future release.</p></dd>
 
 
 <dt id="arg-reg">reg<a class="anchor" aria-label="anchor" href="#arg-reg"></a></dt>
-<dd><p>[<code><a href="https://rdrr.io/pkg/batchtools/man/makeRegistry.html" class="external-link">Registry</a></code>]<br>
-Registry. If not explicitly passed, uses the default registry (see <code><a href="https://rdrr.io/pkg/batchtools/man/getDefaultRegistry.html" class="external-link">setDefaultRegistry</a></code>).</p></dd>
+<dd><p>[<code><a href="https://batchtools.mlr-org.com/reference/makeRegistry.html" class="external-link">Registry</a></code>]<br>
+Registry. If not explicitly passed, uses the default registry (see <code><a href="https://batchtools.mlr-org.com/reference/getDefaultRegistry.html" class="external-link">setDefaultRegistry</a></code>).</p></dd>
 
 
 <dt id="arg-fun">fun<a class="anchor" aria-label="anchor" href="#arg-fun"></a></dt>
 <dd><p>[<code>function</code>]<br>
 Function to apply to each result. The result is passed unnamed as first argument. If <code>NULL</code>, the identity is used.
-If the function has the formal argument “job”, the <code><a href="https://rdrr.io/pkg/batchtools/man/JobExperiment.html" class="external-link">Job</a></code>/<code><a href="https://rdrr.io/pkg/batchtools/man/JobExperiment.html" class="external-link">Experiment</a></code> is also passed to the function.</p></dd>
+If the function has the formal argument “job”, the <code><a href="https://batchtools.mlr-org.com/reference/JobExperiment.html" class="external-link">Job</a></code>/<code><a href="https://batchtools.mlr-org.com/reference/JobExperiment.html" class="external-link">Experiment</a></code> is also passed to the function.</p></dd>
 
 
 <dt id="arg-unmarshal">unmarshal<a class="anchor" aria-label="anchor" href="#arg-unmarshal"></a></dt>

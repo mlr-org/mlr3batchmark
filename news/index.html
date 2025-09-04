@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mlr3batchmark</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.2</span>
       </span>
     </div>
 
@@ -48,16 +48,17 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="development version" id="mlr3batchmark-development-version">mlr3batchmark (development version)<a class="anchor" aria-label="anchor" href="#mlr3batchmark-development-version"></a></h2>
-</div>
+<h2 class="page-header" data-toc-text="0.2.2" id="mlr3batchmark-022">mlr3batchmark 0.2.2<small>2025-09-04</small><a class="anchor" aria-label="anchor" href="#mlr3batchmark-022"></a></h2>
+<ul><li>docs: Fix url in description.</li>
+</ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.2.1" id="mlr3batchmark-021">mlr3batchmark 0.2.1<a class="anchor" aria-label="anchor" href="#mlr3batchmark-021"></a></h2>
+<h2 class="page-header" data-toc-text="0.2.1" id="mlr3batchmark-021">mlr3batchmark 0.2.1<small>2025-05-26</small><a class="anchor" aria-label="anchor" href="#mlr3batchmark-021"></a></h2>
 <ul><li>compatibility: mlr3 1.0.0</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.0" id="mlr3batchmark-020">mlr3batchmark 0.2.0<small>2024-11-25</small><a class="anchor" aria-label="anchor" href="#mlr3batchmark-020"></a></h2>
 <ul><li>feat: The design of <code><a href="../reference/batchmark.html">batchmark()</a></code> can now include parameter settings.</li>
-<li>feat: <code>reduceResultsBatchmark</code> gains argument <code>fun</code> which is passed on to <code><a href="https://rdrr.io/pkg/batchtools/man/reduceResultsList.html" class="external-link">batchtools::reduceResultsList</a></code>. Useful for deleting model data to avoid running out of memory. Thanks to Toby Dylan Hocking <a href="https://github.com/tdhock" class="external-link">@tdhock</a> for the PR (<a href="https://github.com/mlr-org/mlr3batchmark/issues/18" class="external-link uri">https://github.com/mlr-org/mlr3batchmark/issues/18</a>).</li>
+<li>feat: <code>reduceResultsBatchmark</code> gains argument <code>fun</code> which is passed on to <code><a href="https://batchtools.mlr-org.com/reference/reduceResultsList.html" class="external-link">batchtools::reduceResultsList</a></code>. Useful for deleting model data to avoid running out of memory. Thanks to Toby Dylan Hocking <a href="https://github.com/tdhock" class="external-link">@tdhock</a> for the PR (<a href="https://github.com/mlr-org/mlr3batchmark/issues/18" class="external-link uri">https://github.com/mlr-org/mlr3batchmark/issues/18</a>).</li>
 <li>docs: A warning is now given when the loaded mlr3 version differs from the mlr3 version stored in the trained learners.</li>
 <li>feat: Support marshaling.</li>
 <li>feat: A <code>renv</code> project can be passed to <code><a href="../reference/batchmark.html">batchmark()</a></code> that is loaded in the job environment.</li>

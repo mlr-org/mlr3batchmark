@@ -1,4 +1,6 @@
-# mlr3batchmark (development version)
+# mlr3batchmark 0.2.2
+
+* docs: Fix url in description.
 
 # mlr3batchmark 0.2.1
 

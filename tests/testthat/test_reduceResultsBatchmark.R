@@ -31,16 +31,15 @@ test_that("reduceResultsBatchmark", {
   expect_data_table(tab, nrow = 4)
   expect_set_equal(tab$resampling_id, ids(resamplings))
 
-  rpart_model = function(b){
+  rpart_model = function(b) {
     b$score()[learner_id == "classif.rpart"]$learner[[1]]$model
   }
   expect_is(rpart_model(bmr), "rpart")
-  no_models = reduceResultsBatchmark(reg = reg, fun = function(L){
+  no_models = reduceResultsBatchmark(reg = reg, fun = function(L) {
     L$learner_state$model = NULL
     L
   })
   expect_null(rpart_model(no_models))
-  
 })
 
 test_that("warning is given when mlr3 versions mismatch", {
@@ -51,7 +50,12 @@ test_that("warning is given when mlr3 versions mismatch", {
   submitJobs()
   waitForJobs()
 
-  on.exit({mlr_reflections$package_version = mlr3_version}, add = TRUE)
+  on.exit(
+    {
+      mlr_reflections$package_version = mlr3_version
+    },
+    add = TRUE
+  )
 
   mlr_reflections$package_version = "100.0.0"
 

@@ -1,3 +1,4 @@
+#nolint next
 assert_param_values = function(x, n_learners = NULL, .var.name = vname(x)) {
   assert_list(x, len = n_learners, .var.name = .var.name)
 

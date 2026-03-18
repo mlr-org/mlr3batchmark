@@ -13,7 +13,14 @@
 #'
 #' @return [mlr3::BenchmarkResult].
 #' @export
-reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batchtools::getDefaultRegistry(), fun = NULL, unmarshal = TRUE) { # nolint
+#nolint next
+reduceResultsBatchmark = function(
+  ids = NULL,
+  store_backends = TRUE,
+  reg = batchtools::getDefaultRegistry(),
+  fun = NULL,
+  unmarshal = TRUE
+) {
   assert_flag(unmarshal)
   if (is.null(ids)) {
     ids = batchtools::findDone(ids, reg = reg)
@@ -24,7 +31,10 @@ reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batch
     }
   }
 
-  tabs = batchtools::getJobTable(ids, reg = reg)[, c("job.id", "job.name", "repl", "prob.pars", "algo.pars"), with = FALSE]
+  tabs = batchtools::getJobTable(ids, reg = reg)[,
+    c("job.id", "job.name", "repl", "prob.pars", "algo.pars"),
+    with = FALSE
+  ]
   tabs = unnest(tabs, c("prob.pars", "algo.pars"))
   tabs = split(tabs, by = "job.name")
   bmr = mlr3::BenchmarkResult$new()
@@ -66,24 +76,33 @@ reduceResultsBatchmark = function(ids = NULL, store_backends = TRUE, reg = batch
     if (!version_checked) {
       version_checked = TRUE
       if (mlr3::mlr_reflections$package_version != results[[1]]$learner_state$mlr3_version) {
-        lg$warn(paste(sep = "\n",
-          "The mlr3 version (%s) from one of the trained learners differs from the currently loaded mlr3 version (%s).",
-          "This can lead to unexpected behavior and we recommend using the same versions of all mlr3 packages for collecting the results."),
-          results[[1]]$learner_state$mlr3_version, mlr3::mlr_reflections$package_version)
+        lg$warn(
+          paste0(
+            "The mlr3 version (%s) from one of the trained learners differs",
+            " from the currently loaded mlr3 version (%s).\n",
+            "This can lead to unexpected behavior and we recommend using",
+            " the same versions of all mlr3 packages for collecting the results."
+          ),
+          results[[1]]$learner_state$mlr3_version,
+          mlr3::mlr_reflections$package_version
+        )
       }
     }
 
-    rdata = mlr3::ResultData$new(data.table(
-      task = list(task),
-      learner = list(learner),
-      resampling = list(resampling),
-      iteration = tab$repl,
-      prediction = map(results, "prediction"),
-      learner_state = map(results, "learner_state"),
-      param_values = map(results, "param_values"),
-      learner_hash = map_chr(results, "learner_hash"),
-      uhash = tab$job.name
-    ), store_backends = store_backends)
+    rdata = mlr3::ResultData$new(
+      data.table(
+        task = list(task),
+        learner = list(learner),
+        resampling = list(resampling),
+        iteration = tab$repl,
+        prediction = map(results, "prediction"),
+        learner_state = map(results, "learner_state"),
+        param_values = map(results, "param_values"),
+        learner_hash = map_chr(results, "learner_hash"),
+        uhash = tab$job.name
+      ),
+      store_backends = store_backends
+    )
     bmr$combine(mlr3::BenchmarkResult$new(rdata))
   }
 

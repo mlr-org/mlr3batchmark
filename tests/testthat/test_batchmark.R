@@ -107,7 +107,8 @@ test_that("adding parameter values works", {
     task = tasks,
     learner = learners,
     resampling = resamplings,
-    param_values = list(list(list(x = 1), list(x = 0.5))))
+    param_values = list(list(list(x = 1), list(x = 0.5)))
+  )
 
   reg = batchtools::makeExperimentRegistry(NA, make.default = FALSE)
 

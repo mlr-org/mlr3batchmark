@@ -7,7 +7,9 @@ run_learner = function(job, data, learner_hash, param_values_hash, store_models,
   learner = get(learner_hash, envir = .GlobalEnv)
   param_values = get(param_values_hash, envir = .GlobalEnv)
 
-  if (!is.null(param_values)) learner$param_set$set_values(.values = param_values)
+  if (!is.null(param_values)) {
+    learner$param_set$set_values(.values = param_values)
+  }
 
   if (packageVersion("mlr3") > "0.23.0") {
     workhorse(
@@ -31,4 +33,3 @@ run_learner = function(job, data, learner_hash, param_values_hash, store_models,
     )
   }
 }
-

@@ -70,7 +70,10 @@ batchmark = function(design, store_models = FALSE, reg = batchtools::getDefaultR
   } else {
     design$param_values = list(assert_param_values(design$param_values, n_learners = length(design$learner)))
     task = learner = resampling = NULL
-    design = design[, list(task, learner, resampling, param_values = unlist(get("param_values"), recursive = FALSE)), by = c("learner_hash", "task_hash", "resampling_hash")]
+    design = design[,
+      list(task, learner, resampling, param_values = unlist(get("param_values"), recursive = FALSE)),
+      by = c("learner_hash", "task_hash", "resampling_hash")
+    ]
   }
   design[, "param_values_hash" := map(get("param_values"), calculate_hash)]
 

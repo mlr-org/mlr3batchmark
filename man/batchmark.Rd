@@ -24,7 +24,7 @@ Store the fitted model in the resulting object=
 Set to \code{TRUE} if you want to further analyse the models or want to
 extract information like variable importance.}
 
-\item{reg}{\link[batchtools:makeExperimentRegistry]{batchtools::ExperimentRegistry}.}
+\item{reg}{\link[batchtools:ExperimentRegistry]{batchtools::ExperimentRegistry}.}
 
 \item{renv_project}{\code{character(1)}\cr
 Path to a renv project.
@@ -38,9 +38,9 @@ This function provides the functionality to leave the interface of \CRANpkg{mlr3
 of benchmark experiments and switch over to \CRANpkg{batchtools} for a more fine grained control over
 the execution.
 
-\code{batchmark()} populates a \link[batchtools:makeExperimentRegistry]{batchtools::ExperimentRegistry} with jobs in a \code{\link[mlr3:benchmark]{mlr3::benchmark()}} fashion.
-Each combination of \link[mlr3:Task]{mlr3::Task} and \link[mlr3:Resampling]{mlr3::Resampling} defines a \link[batchtools:addProblem]{batchtools::Problem},
-each \link[mlr3:Learner]{mlr3::Learner} is an \link[batchtools:addAlgorithm]{batchtools::Algorithm}.
+\code{batchmark()} populates a \link[batchtools:ExperimentRegistry]{batchtools::ExperimentRegistry} with jobs in a \code{\link[mlr3:benchmark]{mlr3::benchmark()}} fashion.
+Each combination of \link[mlr3:Task]{mlr3::Task} and \link[mlr3:Resampling]{mlr3::Resampling} defines a \link[batchtools:Problem]{batchtools::Problem},
+each \link[mlr3:Learner]{mlr3::Learner} is an \link[batchtools:Algorithm]{batchtools::Algorithm}.
 
 After the jobs have been submitted and are terminated, results can be collected with \code{\link[=reduceResultsBatchmark]{reduceResultsBatchmark()}}
 which returns a \link[mlr3:BenchmarkResult]{mlr3::BenchmarkResult} and thus to return to the interface of \CRANpkg{mlr3}.

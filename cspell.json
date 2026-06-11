@@ -14,6 +14,10 @@
     "man/",   // generated man pages
     "renv/"   // renv library
   ],
+  // ignore non-deterministic tokens in generated chunk output
+  "ignoreRegExpList": [
+    "/Rtmp[A-Za-z0-9]+/g" // random temp-directory names in README output
+  ],
   // use cspell R-dictionary + project-specific word list
   "dictionaries": ["r", "project-words"],
   "dictionaryDefinitions": [

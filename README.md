@@ -46,7 +46,7 @@ reg = makeExperimentRegistry(NA)
 
     ## No readable configuration file found
 
-    ## Created registry in '/tmp/RtmpbcuMc4/registry27b8961304f5da' using cluster functions 'Interactive'
+    ## Created registry in '/tmp/Rtmpqi04ir/registry12bb56a23ce1' using cluster functions 'Interactive'
 
 ``` r
 ids = batchmark(design, reg = reg)
@@ -56,11 +56,11 @@ ids = batchmark(design, reg = reg)
 
     ## Adding problem 'abc694dd29a7a8ce'
 
-    ## Exporting new objects: '2da7eeb80b94fc3b' ...
+    ## Exporting new objects: '10ee41ae832e9304' ...
 
-    ## Exporting new objects: 'c905990877a775af' ...
+    ## Exporting new objects: 'c555f9dfec9c1e4f' ...
 
-    ## Exporting new objects: '3acc41a799a260d8' ...
+    ## Exporting new objects: '02253ecc9afd614a' ...
 
     ## Exporting new objects: 'ecf8ee265ec56766' ...
 
@@ -70,7 +70,7 @@ ids = batchmark(design, reg = reg)
 
     ## Adding problem 'f9791e97f9813150'
 
-    ## Exporting new objects: '62ac3bb85aabfbaf' ...
+    ## Exporting new objects: 'd9b697eed2a7335a' ...
 
     ## Adding 6 experiments ('f9791e97f9813150'[1] x 'run_learner'[2] x repls[3]) ...
 
@@ -80,42 +80,17 @@ submitJobs()
 
     ## Submitting 12 jobs in 12 chunks using cluster functions 'Interactive' ...
 
-    ## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : 
-    ##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)
-    ## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : 
-    ##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)
-    ## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : 
-    ##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)
-    ## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : 
-    ##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)
-    ## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : 
-    ##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)
-    ## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : 
-    ##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)
-    ## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : 
-    ##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)
-    ## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : 
-    ##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)
-    ## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : 
-    ##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)
-    ## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : 
-    ##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)
-    ## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : 
-    ##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)
-    ## Error in workhorse(iteration = job$repl, task = data, learner = learner,  : 
-    ##   unused argument (lgr_threshold = lgr::get_logger("mlr3")$threshold)
-
 ``` r
 getStatus()
 ```
 
-    ## Status for 12 jobs at 2025-05-26 09:23:22:
+    ## Status for 12 jobs at 2026-06-11 11:59:26:
     ##   Submitted    : 12 (100.0%)
     ##   -- Queued    :  0 (  0.0%)
     ##   -- Started   : 12 (100.0%)
     ##   ---- Running :  0 (  0.0%)
-    ##   ---- Done    :  0 (  0.0%)
-    ##   ---- Error   : 12 (100.0%)
+    ##   ---- Done    : 12 (100.0%)
+    ##   ---- Error   :  0 (  0.0%)
     ##   ---- Expired :  0 (  0.0%)
 
 ``` r
@@ -123,7 +98,12 @@ reduceResultsBatchmark()
 ```
 
     ## 
-    ## ── <BenchmarkResult> of 0 rows with 0 resampling run ───────────────────────────
+    ## ── <BenchmarkResult> of 12 rows with 4 resampling run ──────────────────────────
+    ##  nr task_id          learner_id resampling_id iters warnings errors
+    ##   1    iris classif.featureless            cv     3        0      0
+    ##   2    iris       classif.rpart            cv     3        0      0
+    ##   3   sonar classif.featureless            cv     3        0      0
+    ##   4   sonar       classif.rpart            cv     3        0      0
 
 ## Resources
 

@@ -13,6 +13,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Batch Experiments for mlr3">
 <meta property="og:description" content="Extends the mlr3 package with a connector to the package batchtools. This allows to run large-scale benchmark experiments on scheduled high-performance computing clusters.">
+<meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -66,7 +67,7 @@
       </header><div class="row">
   <div class="contents col-md-9">
 <div class="section level1">
-<div class="page-header"><h1 id="mlr3batchmark">mlr3batchmark<a class="anchor" aria-label="anchor" href="#mlr3batchmark"></a>
+<div class="page-header"><h1 id="mlr3batchmark-">mlr3batchmark <img src="reference/figures/logo.png" align="right" width="120"><a class="anchor" aria-label="anchor" href="#mlr3batchmark-"></a>
 </h1></div>
 <p><a href="https://github.com/mlr-org/mlr3batchmark/actions/workflows/r-cmd-check.yml" class="external-link"><img src="https://github.com/mlr-org/mlr3batchmark/actions/workflows/r-cmd-check.yml/badge.svg" alt="r-cmd-check"></a> <a href="https://CRAN.R-project.org/package=mlr3batchmark" class="external-link"><img src="https://www.r-pkg.org/badges/version/mlr3batchmark" alt="CRAN status"></a> <a href="https://stackoverflow.com/questions/tagged/mlr3" class="external-link"><img src="https://img.shields.io/badge/stackoverflow-mlr3-orange.svg" alt="StackOverflow"></a> <a href="https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/" class="external-link"><img src="https://img.shields.io/badge/chat-mattermost-orange.svg" alt="Mattermost"></a></p>
 <p>A connector between <a href="https://github.com/mlr-org/mlr3" class="external-link">mlr3</a> and <a href="http://batchtools.mlr-org.com/" class="external-link">batchtools</a>. This allows to run large-scale benchmark experiments on scheduled high-performance computing clusters.</p>
@@ -95,14 +96,14 @@
 <span><span class="va">reg</span> <span class="op">=</span> <span class="fu"><a href="https://batchtools.mlr-org.com/reference/makeExperimentRegistry.html" class="external-link">makeExperimentRegistry</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="do">## No readable configuration file found</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="do">## Created registry in '/tmp/Rtmpqi04ir/registry12bb56a23ce1' using cluster functions 'Interactive'</span></span></code></pre></div>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="do">## Created registry in '/tmp/RtmpS8hWnq/registry73a7b42e20d' using cluster functions 'Interactive'</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ids</span> <span class="op">=</span> <span class="fu"><a href="reference/batchmark.html">batchmark</a></span><span class="op">(</span><span class="va">design</span>, reg <span class="op">=</span> <span class="va">reg</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="do">## Adding algorithm 'run_learner'</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="do">## Adding problem 'abc694dd29a7a8ce'</span></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="do">## Exporting new objects: '10ee41ae832e9304' ...</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="do">## Exporting new objects: '9e46aff6e4cf00b1' ...</span></span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="do">## Exporting new objects: 'c555f9dfec9c1e4f' ...</span></span>
 <span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
@@ -116,7 +117,7 @@
 <span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a></span>
 <span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="do">## Adding problem 'f9791e97f9813150'</span></span>
 <span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="do">## Exporting new objects: 'd9b697eed2a7335a' ...</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="do">## Exporting new objects: '2c33cdf2caba8316' ...</span></span>
 <span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a></span>
 <span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="do">## Adding 6 experiments ('f9791e97f9813150'[1] x 'run_learner'[2] x repls[3]) ...</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -124,7 +125,7 @@
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="do">## Submitting 12 jobs in 12 chunks using cluster functions 'Interactive' ...</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://batchtools.mlr-org.com/reference/getStatus.html" class="external-link">getStatus</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">## Status for 12 jobs at 2026-06-11 11:59:26:</span></span>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">## Status for 12 jobs at 2026-07-02 11:49:27:</span></span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="do">##   Submitted    : 12 (100.0%)</span></span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="do">##   -- Queued    :  0 (  0.0%)</span></span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="do">##   -- Started   : 12 (100.0%)</span></span>

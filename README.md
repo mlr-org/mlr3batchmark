@@ -1,5 +1,5 @@
 
-# mlr3batchmark
+# mlr3batchmark <img src="man/figures/logo.png" align="right" width = "120" />
 
 [![r-cmd-check](https://github.com/mlr-org/mlr3batchmark/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/mlr-org/mlr3batchmark/actions/workflows/r-cmd-check.yml)
 [![CRAN
@@ -46,7 +46,7 @@ reg = makeExperimentRegistry(NA)
 
     ## No readable configuration file found
 
-    ## Created registry in '/tmp/Rtmpqi04ir/registry12bb56a23ce1' using cluster functions 'Interactive'
+    ## Created registry in '/tmp/RtmpS8hWnq/registry73a7b42e20d' using cluster functions 'Interactive'
 
 ``` r
 ids = batchmark(design, reg = reg)
@@ -56,7 +56,7 @@ ids = batchmark(design, reg = reg)
 
     ## Adding problem 'abc694dd29a7a8ce'
 
-    ## Exporting new objects: '10ee41ae832e9304' ...
+    ## Exporting new objects: '9e46aff6e4cf00b1' ...
 
     ## Exporting new objects: 'c555f9dfec9c1e4f' ...
 
@@ -70,7 +70,7 @@ ids = batchmark(design, reg = reg)
 
     ## Adding problem 'f9791e97f9813150'
 
-    ## Exporting new objects: 'd9b697eed2a7335a' ...
+    ## Exporting new objects: '2c33cdf2caba8316' ...
 
     ## Adding 6 experiments ('f9791e97f9813150'[1] x 'run_learner'[2] x repls[3]) ...
 
@@ -84,7 +84,7 @@ submitJobs()
 getStatus()
 ```
 
-    ## Status for 12 jobs at 2026-06-11 11:59:26:
+    ## Status for 12 jobs at 2026-07-02 11:49:27:
     ##   Submitted    : 12 (100.0%)
     ##   -- Queued    :  0 (  0.0%)
     ##   -- Started   : 12 (100.0%)

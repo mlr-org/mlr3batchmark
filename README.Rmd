@@ -1,7 +1,7 @@
 ---
 output: github_document
 ---
-# mlr3batchmark
+# mlr3batchmark <img src="man/figures/logo.png" align="right" width = "120" />
 
 [![r-cmd-check](https://github.com/mlr-org/mlr3batchmark/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/mlr-org/mlr3batchmark/actions/workflows/r-cmd-check.yml)
 [![CRAN status](https://www.r-pkg.org/badges/version/mlr3batchmark)](https://CRAN.R-project.org/package=mlr3batchmark)

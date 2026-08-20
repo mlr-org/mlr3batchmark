@@ -21,7 +21,7 @@ Additionally, you can set the additional column 'param_values', see \code{\link[
 
 \item{store_models}{(\code{logical(1)})\cr
 Store the fitted model in the resulting object=
-Set to \code{TRUE} if you want to further analyse the models or want to
+Set to \code{TRUE} if you want to further analyze the models or want to
 extract information like variable importance.}
 
 \item{reg}{\link[batchtools:ExperimentRegistry]{batchtools::ExperimentRegistry}.}

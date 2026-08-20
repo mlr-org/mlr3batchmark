@@ -23,7 +23,7 @@ Invalid ids are ignored.}
 \item{store_backends}{(\code{logical(1)})\cr
 Keep the \link[mlr3]{DataBackend} of the \link[mlr3]{Task} in the \link[mlr3]{ResampleResult}?
 Set to \code{TRUE} if your performance measures require a \link[mlr3]{Task},
-or to analyse results more conveniently.
+or to analyze results more conveniently.
 Set to \code{FALSE} to reduce the file size and memory footprint
 after serialization.
 The current default is \code{TRUE}, but this eventually will be changed

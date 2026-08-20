@@ -6,6 +6,8 @@
 \alias{mlr3batchmark-package}
 \title{mlr3batchmark: Batch Experiments for 'mlr3'}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Extends the 'mlr3' package with a connector to the package 'batchtools'. This allows to run large-scale benchmark experiments on scheduled high-performance computing clusters.
 }
 \seealso{
